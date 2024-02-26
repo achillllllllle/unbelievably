@@ -1,0 +1,13 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1459624470348-67edb45d81b1?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1>Bring <strong>magic</strong> and <strong>wonder</strong> to your everyday life!</h1>
+    <p>Let your childhood dreams come to life</p>
+    <%= simple_form_for :search, url: root_path, method: :get do |f| %>
+    <div class="search-form-control form-group">
+      <input class="form-control string required" placeholder="Find your next magical adventure" type="text" name="search[query]" id="search_query" />
+      <button name="button" type="submit" class="btn btn-primary">
+        <i class="fas fa-search"></i></button>
+    </div>
+    <% end %>
+  </div>
+</div>
