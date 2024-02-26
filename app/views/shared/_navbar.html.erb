@@ -28,9 +28,8 @@
             </div>
           </li>
         <% else %>
-          <li class="nav-item d-flex">
-            <%= link_to "I have a wonder to rent", new_wonder_path, class: "nav-link" %>
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Create a listing", new_wonder_path, class: "btn btn-light me-2" %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
           </li>
         <% end %>
       </ul>
