@@ -1,0 +1,33 @@
+<div class="container">
+<%= simple_form_for @wonder, html: { class: 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.input :title, label: "Titre", input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :price_per_day, label: "Prix par jour", as: :float, input_html: { class: 'form-control' }, wrapper: :horizontal_form %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :type, label: "Type", input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :location, label: "Emplacement", input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :content, label: "Contenu", as: :text, input_html: { class: 'form-control' } %>
+  </div>
+
+  <% if @wonder.respond_to?(:user) %>
+    <div class="form-group">
+      <%= f.association :user, label: "Utilisateur", include_blank: false, input_html: { class: 'form-control' } %>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Enregistrer", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>
