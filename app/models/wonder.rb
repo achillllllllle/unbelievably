@@ -1,0 +1,2 @@
+class Wonder < ApplicationRecord
+end
