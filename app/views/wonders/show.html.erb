@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="intro">
+    <h1><%= @wonder.title %></h1>
+
+    <p>Partager</p>
+    <p>Enregistrer</p>
+  </div>
+
+  <p>insert Images</p>
+  
+  <div class="infos">
+    <h2><%= @wonder.type %> - <%= @wonder.location %></h2>
+
+    <div class="user">
+      <%= @user.username %>
+      <button>Contact</button>
+    </div>
+
+    <div class="description">
+      <%= @wonder.content %>
+
+    </div>
+  </div>
+
+  <div class="booking">
+
+    <div>
+      <p><%= @wonder.price %> € par jour</p>
+    </div>
+
+    <div class="calendar">
+      <%= @wonder.start_date %>
+      <%= @wonder.end_date %>
+    </div>
+
+    <button>Book</button>
+  </div>
+
+</div>
+
+
+
+<%# à côté : module de réservations %>
+
+<%# afficher le calendrier de dispos %>
+
+<%# intégrer une map ? %>
+
+<%# Autres possibilités de wonders dans le même lieu %>
