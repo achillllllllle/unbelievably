@@ -3,7 +3,7 @@ class WondersController < ApplicationController
 
   def index
     referrer = request.referrer
-    if referrer && referrer.include?("/")
+    if params["search"] && params["search"]["query"].present?
       # Logique à exécuter si la requête vient de l'URL spécifiée
       query = params["search"]["query"]
       @wonders = Wonder.where("title LIKE ?", "%#{query}%")
