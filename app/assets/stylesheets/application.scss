@@ -14,4 +14,26 @@
 
 a {
   text-decoration:none!important;
+  color: black!important;
+}
+
+
+#wonderPhotosCarousel img {
+  height: 550px; /* Fixe la hauteur des images */
+  width: 100%; /* Permet aux images de s'étirer pour remplir la largeur */
+  object-fit: cover; /* Assure que les images couvrent l'espace disponible sans perdre leurs proportions */
+}
+
+#wonderPhotosCarousel {
+  height: 550px; /* Fixe la hauteur du carousel */
+}
+
+@media (max-width: 768px) {
+  #wonderPhotosCarousel img {
+    height: 300px;
+  }
+
+  #wonderPhotosCarousel {
+    height: 300px;
+  }
 }
