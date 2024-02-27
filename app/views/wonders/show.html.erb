@@ -4,10 +4,27 @@
     <h1><%= @wonder.title %></h1>
   </div>
 
-  <div class="image-container py-3">
-    <div class="img-fluid" alt="Responsive image">
-      <%= image_tag('thumbnail.jpeg') %>
+  <div id="wonderPhotosCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% if @wonder.photos.attached? %>
+        <% @wonder.photos.each_with_index do |photo, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <%= cl_image_tag(photo.key, class: "d-block w-100", alt: "Wonder photo #{index}") %>
+          </div>
+        <% end %>
+      <% else %>
+          <%= image_tag('thumbnail.jpeg', class: "d-block w-100", alt: "Default thumbnail") %>
+        </div>
+      <% end %>
     </div>
+    <a class="carousel-control-prev" href="#wonderPhotosCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#wonderPhotosCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
 
     <div class="principal-infos d-flex align-items-center justify-content-between pt-2">
