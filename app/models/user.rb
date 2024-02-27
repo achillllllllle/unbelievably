@@ -8,7 +8,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, :telephone, :birth_date, presence: true
+  validates :username, :phone, :birth_date, presence: true
   validates :username, format: { with: /[a-z0-9_-]{3,15}/ }
-  validates :telephone, format: { with: /(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})/ }
+  validates :phone, format: { with: /(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})/ }
 end

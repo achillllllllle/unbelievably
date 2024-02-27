@@ -1,49 +1,20 @@
 <%= render "shared/banner" %>
 <div class="container">
   <div class="cards mt-4">
+    <% @wonders.each do |wonder| %>
     <div class="card-wonder">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+      <%= image_tag('thumbnail.jpeg') %>
       <div class="card-wonder-infos">
         <div>
-          <h2>Title here</h2>
-          <p>Short description here!</p>
+          <h2><%= wonder.title %></h2>
+          <p><%= wonder.content %></p>
+          <p><%= wonder.location %></p>
+          <p><%= wonder.category %></p>
         </div>
-        <h2 class="card-wonder-pricing">£99.99</h2>
+        <h2 class="card-wonder-pricing"><%= wonder.price_per_day  %></h2>
         <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
       </div>
     </div>
-    <div class="card-wonder">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-      <div class="card-wonder-infos">
-        <div>
-          <h2>Title here</h2>
-          <p>Short description here!</p>
-        </div>
-        <h2 class="card-wonder-pricing">£99.99</h2>
-        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
-      </div>
-    </div>
-    <div class="card-wonder">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-      <div class="card-wonder-infos">
-        <div>
-          <h2>Title here</h2>
-          <p>Short description here!</p>
-        </div>
-        <h2 class="card-wonder-pricing">£99.99</h2>
-        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
-      </div>
-    </div>
-      <div class="card-wonder">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-      <div class="card-wonder-infos">
-        <div>
-          <h2>Title here</h2>
-          <p>Short description here!</p>
-        </div>
-        <h2 class="card-wonder-pricing">£99.99</h2>
-        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
