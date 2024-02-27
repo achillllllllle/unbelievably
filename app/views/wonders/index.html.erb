@@ -6,7 +6,9 @@
       <%= image_tag('thumbnail.jpeg') %>
       <div class="card-wonder-infos">
         <div>
-          <h2><%= wonder.title %></h2>
+          <div class="class text-decoration-none">
+            <h2><%= link_to wonder.title, wonder_path(wonder) %></h2>
+          </div>
           <p><%= wonder.content %></p>
           <p><%= wonder.location %></p>
           <p><%= wonder.category %></p>

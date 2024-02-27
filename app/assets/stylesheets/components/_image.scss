@@ -1,0 +1,11 @@
+.image-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}

@@ -1,42 +1,71 @@
 <div class="container">
 
-  <div class="intro">
+  <div class="intro pt-3">
     <h1><%= @wonder.title %></h1>
-
-    <p>Partager</p>
-    <p>Enregistrer</p>
   </div>
 
-  <p>insert Images</p>
-  
-  <div class="infos">
-    <h2><%= @wonder.type %> - <%= @wonder.location %></h2>
-
-    <div class="user">
-      <%= @user.username %>
-      <button>Contact</button>
-    </div>
-
-    <div class="description">
-      <%= @wonder.content %>
-
+  <div class="image-container py-3">
+    <div class="img-fluid" alt="Responsive image">
+      <%= image_tag('thumbnail.jpeg') %>
     </div>
   </div>
 
-  <div class="booking">
-
-    <div>
-      <p><%= @wonder.price %> € par jour</p>
+    <div class="principal-infos d-flex align-items-center justify-content-between pt-2">
+      <h2><%= @wonder.category %> - <%= @wonder.location %></h2>
+      <div class=" buttons-container d-flex justify-content-end">
+        <p class="button">Share</p>
+        <p class="button">Save</p>
+      </div>
     </div>
 
-    <div class="calendar">
-      <%= @wonder.start_date %>
-      <%= @wonder.end_date %>
+  <div class="d-flex">
+    <div class="col-md-8">
+      <div class="infos-container ml-8">
+
+        <div class="user d-flex align-items-center py-3">
+          <div class="avatar-pic">
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-show" />
+          </div>
+          <div class="user-details">
+            <p class="user-name mb-1 pl-1">User : <strong><%= @wonder.user.username %></strong></p>
+            <p class="button text-secondary mb-1">Send a message</p>
+          </div>
+        </div>
+
+        <div class="border" style="border-top-color: rgb(221, 221, 221); border-top-width: 0.5px;"></div>
+
+        <div class="description py-4 d-flex align-items-center">
+          <i class="fas fa-pen-to-square details-icon"></i>
+          <div class="flex-grow-1">
+            <%= @wonder.content %>
+          </div>
+        </div>
+
+        <div class="border" style="border-top-color: rgb(221, 221, 221); border-top-width: 0.5px;"></div>
+
+        <p class="button mt-3"><%= link_to "Back to all wonders", wonders_path %></p>
+
+      </div>
     </div>
 
-    <button>Book</button>
+    <div class="col-md-4">
+      <div class="booking-container p-4">
+
+        <div class="price d-flex align-items-center">
+          <i class="fa-solid fa-tag details-icon"></i>
+            <p class="mb-0"><strong><%= @wonder.price_per_day %>€</strong> per day</p>
+        </div>
+
+        <p class="mt-3"><I>Insert calendar</I></p>
+
+        <div class="book-btn py-4">
+          <p class="button">✨ Book this wonder ✨</p>
+        </div>
+
+      </div>
+    </div>
+
   </div>
-
 </div>
 
 
