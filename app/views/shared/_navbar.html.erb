@@ -28,8 +28,21 @@
             </div>
           </li>
         <% else %>
-            <%= link_to "Create a listing", new_wonder_path, class: "btn btn-light me-2" %>
-            <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+        <!-- Modal -->
+          <div class="modal fade" id="newWonderModal" tabindex="-1" aria-labelledby="newWonderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="newWonderModalLabel">New Wonder</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Le formulaire wonders#new sera chargé ici -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= link_to 'Create a listing', '#', class: "btn btn-light", data: { controller: 'wonders', action: 'click->wonders#newWonder' } %>  <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
           </li>
         <% end %>
       </ul>

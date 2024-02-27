@@ -9,7 +9,12 @@ class WondersController < ApplicationController
 
   def new
     @wonder = Wonder.new
+    respond_to do |format|
+      format.html # Pour les requêtes HTML, renvoie le formulaire complet
+      format.js { render layout: false } # Pour les requêtes AJAX, renvoie seulement le formulaire sans layout
+    end
   end
+
 
   def create
     @wonder = Wonder.new(wonder_params)
