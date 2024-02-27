@@ -12,23 +12,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-        <!-- Modal -->
           <div class="modal fade" id="newWonderModal" tabindex="-1" aria-labelledby="newWonderModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -42,7 +26,21 @@
               </div>
             </div>
           </div>
-          <%= link_to 'Create a listing', '#', class: "btn btn-light", data: { controller: 'wonders', action: 'click->wonders#newWonder' } %>  <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+          <%= link_to 'Create a listing', '#', class: "btn btn-light", data: { controller: 'wonders', action: 'click->wonders#newWonder' } %>
+          <li class="nav-item">
+          </li>
+          <li class="nav-item dropdown">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+          </a>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "My profile", "#", class: "dropdown-item" %>
+              <%= link_to "My reservations", "#", class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+         <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
           </li>
         <% end %>
       </ul>
