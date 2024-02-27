@@ -31,13 +31,12 @@ class WondersController < ApplicationController
       redirect_to wonder_path(@wonder)
     else
       render :new, status: :unprocessable_entity
-      raise
     end
   end
 
   private
 
   def wonder_params
-    params.require(:wonder).permit(:title, :price_per_day, :type, :location, :category, :content, :user_id)
+    params.require(:wonder).permit(:title, :price_per_day, :type, :location, :category, :content, :user_id, :photos => [])
   end
 end
