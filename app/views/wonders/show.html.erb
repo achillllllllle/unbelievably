@@ -1,0 +1,29 @@
+<div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title rounded">
+      <strong><%= @wonder.price_per_day %></strong> € par nuit
+    </h5>
+    <%=  simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
+        <%= f.input :start_date,
+                    as: :string,
+                    input_html: { data: { datepicker_target: "startDates" } },
+                    label: false,
+                    placeholder: 'Date de début' %>
+
+        <%= f.input :end_date,
+                    as: :string,
+                    input_html: { data: { datepicker_target: "endDates" } },
+                    label: false,
+                    placeholder: 'Date de fin'
+                     %>
+
+                    <%= f.button :submit, 'Reservé', class: "btn btn-primary" %>
+    <% end %>
+    <hr>
+
+    </div>
+
+</div>
+
+<!-- Il est préférable de placer les liens CSS dans le <head>, mais pour cet exemple, je le laisse ici pour contexte -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

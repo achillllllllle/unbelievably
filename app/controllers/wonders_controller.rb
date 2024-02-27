@@ -5,6 +5,7 @@ class WondersController < ApplicationController
 
   def show
     @wonder = Wonder.find(params[:id])
+    @reservation = Reservation.new
   end
 
   def new
