@@ -1,8 +1,11 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
   <div class="container-fluid">
-    <%= link_to wonders_path, class: "navbar-brand" do %>
-      <%= image_tag "logo.png" %>
-    <% end %>
+    <div class="d-flex align-items-center">
+      <%= link_to wonders_path, class: "navbar-brand d-flex align-items-center" do %>
+        <%= image_tag "logo.png" %>
+        <h2  class="fw-bold m-0 ps-2">Unbelievably</h2>
+      <% end %>
+    </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,24 +15,35 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
           </li>
+          <div class="modal fade" id="newWonderModal" tabindex="-1" aria-labelledby="newWonderModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="newWonderModalLabel">New Wonder</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Le formulaire wonders#new sera chargé ici -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= link_to 'Create a listing', new_wonder_path, class: "btn btn-light" %>
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "My profile", "#", class: "dropdown-item" %>
+              <%= link_to "My reservations", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
-            <%= link_to "Create a listing", new_wonder_path, class: "btn btn-light me-2" %>
-            <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+         <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
           </li>
         <% end %>
       </ul>
