@@ -1,0 +1,45 @@
+<h1><%= @user.username %>'s Profile</h1>
+
+<h2>All My Wonders</h2>
+<% @my_wonders.each do |my_wonder| %>
+  <div class="notification">
+    <%= image_tag('thumbnail.jpeg',:class => "avatar-square") %>
+    <div class="notification-content">
+      <p><%= my_wonder.title %></p>
+      <p><%= my_wonder.content %></p>
+      <% my_wonder.reservations.each do |my_pending| %>
+        <div class="notification-content">
+        <p><%= my_pending.start_date %></p>
+        <p><%= my_pending.end_date %></p>
+        <p><%= my_pending.price %></p>
+        </div>
+        <div class="notification-actions">
+        <a href="#">Accept <i class="fa-solid fa-check"></i></a>
+        <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+      </div>
+      <% end %>
+    </div>
+    <div class="notification-actions">
+      <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+      <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+    </div>
+  </div>
+<% end %>
+
+<h2>My Reservations</h2>
+<% @my_reservations.each do |my_reservation| %>
+  <div class="notification">
+    <%= image_tag('thumbnail.jpeg',:class => "avatar-square") %>
+    <div class="notification-content">
+      <p><%= my_reservation.wonder.title %></p>
+      <p><%= my_reservation.start_date %></p>
+      <p><%= my_reservation.end_date %></p>
+      <p><%= my_reservation.price %></p>
+    </div>
+
+    <div class="notification-actions">
+      <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+      <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+    </div>
+  </div>
+<% end %>

@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :wonders do
     resources :reservations
   end
+  resources :users, only: %i[show edit update]
 end

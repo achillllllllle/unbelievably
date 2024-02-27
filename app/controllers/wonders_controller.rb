@@ -1,5 +1,6 @@
 class WondersController < ApplicationController
   def index
+    # path = request.original_url
     @wonders = Wonder.all
   end
 
