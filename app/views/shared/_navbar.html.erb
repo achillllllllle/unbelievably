@@ -1,8 +1,11 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
   <div class="container-fluid">
-    <%= link_to wonders_path, class: "navbar-brand" do %>
-      <%= image_tag "logo.png" %>
-    <% end %>
+    <div class="d-flex align-items-center">
+      <%= link_to wonders_path, class: "navbar-brand d-flex align-items-center" do %>
+        <%= image_tag "logo.png" %>
+        <h2  class="fw-bold m-0 ps-2">Unbelievably</h2>
+      <% end %>
+    </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
