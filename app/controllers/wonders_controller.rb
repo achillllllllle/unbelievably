@@ -2,8 +2,17 @@ class WondersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    # path = request.original_url
-    @wonders = Wonder.all
+    referrer = request.referrer
+    if referrer && referrer.include?("/")
+      # Logique à exécuter si la requête vient de l'URL spécifiée
+      query = params["search"]["query"]
+      @wonders = Wonder.where("title LIKE ?", "%#{query}%")
+      # Requette SQL =  SELECT * FROM wonders WHERE title LIKE 'params["search"]["query"]%';
+    else
+      # Logique par défaut si la requête ne vient pas de l'URL spécifiée
+      @wonders = Wonder.all
+    end
+
   end
 
   def show

@@ -9,4 +9,5 @@ export default class extends Controller {
     flatpickr(this.startDatesTarget, { dateFormat: "d-m-Y", minDate: "today" });
     flatpickr(this.endDatesTarget, { dateFormat: "d-m-Y", minDate: "today" });
   }
+  
 }
