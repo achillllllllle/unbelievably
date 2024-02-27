@@ -1,0 +1,55 @@
+<h1><%= @user.username %>'s Profile</h1>
+
+<h2>All My Wonders</h2>
+<% @my_wonders.each do |my_wonder| %>
+  <div class="notification">
+    <%= link_to wonder_path(my_wonder.id), class: 'text-decoration-none' do %>
+      <%= image_tag('thumbnail.jpeg',:class => "notification-photo") %>
+      <div class="notification-content">
+        <p><strong><%= my_wonder.title %></strong></p>
+        <p><%= my_wonder.content %></p>
+    <% end %>
+      <p><strong>Offers</strong></p>
+      <% my_wonder.reservations.each do |my_pending| %>
+        <%= link_to '#', class: 'text-decoration-none' do %>
+          <div class="notification">
+            <div class="notification-content">
+              <p><%= my_pending.user.username %></p>
+            </div>
+            <div class="notification-content">
+              <p>From <%= my_pending.start_date %> To <%= my_pending.end_date %></p>
+              <p><%= my_pending.price %> euros</p>
+            </div>
+            <div class="notification-actions">
+              <a href="#">Accept <i class="fa-solid fa-check"></i></a>
+              <a href="#">Refuse <i class="far fa-trash-alt"></i></a>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="notification-actions">
+      <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+      <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+    </div>
+  </div>
+<% end %>
+
+<h2>My Reservations</h2>
+<% @my_reservations.each do |my_reservation| %>
+  <div class="notification">
+    <%= image_tag('thumbnail.jpeg',:class => "notification-photo") %>
+      <%= link_to '#', class: 'text-decoration-none' do %>
+        <div class="notification-content">
+          <p><%= my_reservation.wonder.title %></p>
+          <p><%= my_reservation.start_date %></p>
+          <p><%= my_reservation.end_date %></p>
+          <p><%= my_reservation.price %></p>
+        </div>
+      <% end %>
+    <div class="notification-actions">
+      <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
+      <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+    </div>
+  </div>
+<% end %>

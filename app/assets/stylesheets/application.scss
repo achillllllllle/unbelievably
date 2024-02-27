@@ -9,4 +9,10 @@
 
 // Your CSS partials
 @import "components/index";
+@import "components/notification";
 @import "pages/index";
+
+a {
+  text-decoration:none!important;
+  color: #563194!important;
+}
