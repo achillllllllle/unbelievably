@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Declaration of routes
   devise_for :users
   resources :wonders do
-    resources :reservations
+    resources :reservations, only: %i[create]
   end
   resources :users, only: %i[show edit update]
 end

@@ -22,7 +22,6 @@ class WondersController < ApplicationController
       redirect_to wonder_path(@wonder)
     else
       render :new, status: :unprocessable_entity
-      raise
     end
   end
 

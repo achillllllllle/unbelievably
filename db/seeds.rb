@@ -1,4 +1,5 @@
 puts "Clearing existing data..."
+Reservation.destroy_all
 User.destroy_all
 Wonder.destroy_all
 

@@ -10,5 +10,6 @@ class User < ApplicationRecord
 
   validates :username, :phone, :birth_date, presence: true
   validates :username, format: { with: /[a-z0-9_-]{3,15}/ }
+  validates :username, :email, :phone, uniqueness: true
   validates :phone, format: { with: /(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})/ }
 end
