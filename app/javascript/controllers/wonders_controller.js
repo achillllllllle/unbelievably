@@ -5,7 +5,8 @@ export default class extends Controller {
     console.log('newWonder');
     event.preventDefault();
 
-    fetch('/wonders/new', { headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'text/html'} })
+    fetch('/wonders/new', { headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript',
+  } })
     .then(response => response.text())
     .then(html => {
       document.querySelector('#newWonderModal .modal-body').innerHTML = html
