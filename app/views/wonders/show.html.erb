@@ -10,13 +10,18 @@
     </div>
   </div>
 
-    <div class="principal-infos d-flex align-items-center justify-content-between pt-2">
-      <h2><%= @wonder.category %> - <%= @wonder.location %></h2>
-      <div class=" buttons-container d-flex justify-content-end">
-        <p class="button">Share</p>
-        <p class="button">Save</p>
-      </div>
+  <div class="principal-infos d-flex align-items-center justify-content-between pt-2">
+    <h2><%= @wonder.category %> - <%= @wonder.location %></h2>
+
+    <div class=" buttons-container d-flex justify-content-end">
+      <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">
+        Share
+      </p>
+
+      <p class="button">Save</p>
     </div>
+    <%= render "shared/share" %>
+  </div>
 
   <div class="d-flex">
     <div class="col-md-8">
@@ -32,7 +37,7 @@
           </div>
         </div>
 
-        <div class="border" style="border-top-color: rgb(221, 221, 221); border-top-width: 0.5px;"></div>
+        <hr>
 
         <div class="description py-4 d-flex align-items-center">
           <i class="fas fa-pen-to-square details-icon"></i>
@@ -41,9 +46,11 @@
           </div>
         </div>
 
-        <div class="border" style="border-top-color: rgb(221, 221, 221); border-top-width: 0.5px;"></div>
+        <hr>
 
-        <p class="button mt-3"><%= link_to "Back to all wonders", wonders_path %></p>
+        <div class="d-grid">
+          <p class="button mt-3 col-3"><%= link_to "Back to all wonders", wonders_path %></p>
+        </div>
 
       </div>
     </div>
@@ -51,41 +58,51 @@
     <div class="col-md-4">
       <div class="booking-container p-4">
 
-        <div class="price d-flex align-items-center">
-          <i class="fa-solid fa-tag details-icon"></i>
-            <p class="mb-0"><strong><%= @wonder.price_per_day %>€</strong> per day</p>
-        </div>
+        <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+          <div class="card-body">
 
-        <p class="mt-3"><I>Insert calendar</I></p>
-           <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title rounded">
-                <strong><%= @wonder.price_per_day %></strong> € par nuit
-              </h5>
-              <%=  simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
-                <%= f.input :start_date,
-                            as: :string,
-                            input_html: { data: { datepicker_target: "startDates" } },
-                            label: false,
-                            placeholder: 'Date de début' %>
-                <%= f.input :end_date,
-                            as: :string,
-                            input_html: { data: { datepicker_target: "endDates" } },
-                            label: false,
-                            placeholder: 'Date de fin'
-                             %>
-                 <%= f.button :submit, 'Reservé', class: "btn btn-primary" %>
-              <% end %>
-              <hr>
+            <div class="price d-flex align-items-center pb-3">
+              <i class="fa-solid fa-tag details-icon"></i>
+                <h5 class="mb-0"><strong><%= @wonder.price_per_day %>€</strong> per day</h5>
+            </div>
+
+            <%=  simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
+              <%= f.input :start_date,
+                          as: :string,
+                          input_html: { data: { datepicker_target: "startDates" } },
+                          label: false,
+                          placeholder: 'Date de début' %>
+              <%= f.input :end_date,
+                          as: :string,
+                          input_html: { data: { datepicker_target: "endDates" } },
+                          label: false,
+                          placeholder: 'Date de fin'
+                            %>
+              <div class="d-grid">
+                <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3" %>
               </div>
+            <% end %>
+            <hr>
+
+            <div class="summary">
+              <h5>Summary</h5>
+
+              <div class="d-flex justify-content-between my-3">
+                <div class="w-100"><p>Days (1)</p></div>
+                <div class="flex-shrink-1"><p><%= @wonder.price_per_day %>€</p></div>
+              </div>
+
+              <div class="d-flex justify-content-between border-top pt-3">
+                <div class="w-100 fw-medium"><p>Total</p></div>
+                <div class="flex-shrink-1 fw-medium"><p><%= @wonder.price_per_day %>€</p></div>
+              </div>
+            </div>
+
           </div>
-
-          <!-- Il est préférable de placer les liens CSS dans le <head>, mais pour cet exemple, je le laisse ici pour contexte -->
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-        <div class="book-btn py-4">
-          <p class="button">✨ Book this wonder ✨</p>
         </div>
+
+        <!-- Il est préférable de placer les liens CSS dans le <head>, mais pour cet exemple, je le laisse ici pour contexte -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
       </div>
     </div>

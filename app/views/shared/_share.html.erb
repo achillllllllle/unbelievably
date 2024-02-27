@@ -1,34 +1,55 @@
-<div class="share-card">
-  <div style="display: inline-block; margin-right: 10px;">
-    <h2>Share this wonder</h2>
-    <p class="button" onclick="navigator.clipboard.writeText('<%= @wonder_url %>')">Copy Link</p>
-  </div>
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
 
-  <div class="share-link my-2">
-    <div style="display: flex; align-items: center;">
-      <i class="fa-regular fa-envelope details-icon"></i>
-      <p class="button m-0"><a href="mailto:?subject=Check out this wonder&body=I thought you might like this wonder: <%= @wonder_url %>">Email</a></p>
-    </div>
-  </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-center" id="charreModalLabel">✨ Share this wonder ✨</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
-  <div class="share-link my-2">
-    <div style="display: flex; align-items: center;">
-      <i class="fa-brands fa-whatsapp details-icon"></i>
-      <p class="button m-0"><a href="whatsapp://send?text=Check out this wonder: <%= @wonder_url %>">WhatsApp</a></p>
-    </div>
-  </div>
+      <div class="modal-body">
+        <div class="share-card">
+          <div class="share-link my-2">
+            <div style="display: flex; align-items: center;">
+              <i class="fa-solid fa-link details-icon"></i>
+              <p class="button m-0"><a href="navigator.clipboard.writeText('<%= @wonder_url %>')">Copy Link</a></p>
+            </div>
+          </div>
 
-  <div class="share-link my-2">
-    <div style="display: flex; align-items: center;">
-      <i class="fa-brands fa-facebook-messenger details-icon"></i>
-      <p class="button m-0"><a href="fb-messenger://share/?link=<%= @wonder_url %>">Messenger</a></p>
-    </div>
-  </div>
+          <div class="share-link my-2">
+            <div style="display: flex; align-items: center;">
+              <i class="fa-regular fa-envelope details-icon"></i>
+              <p class="button m-0"><a href="mailto:?subject=Check out this wonder&body=I thought you might like this wonder: <%= @wonder_url %>">Email</a></p>
+            </div>
+          </div>
 
-  <div class="share-link my-2">
-    <div style="display: flex; align-items: center;">
-      <i class="fa-brands fa-instagram details-icon"></i>
-      <p class="button m-0"><a href="https://www.instagram.com/create/post/?url=<%= @wonder_url %>">Instagram</a></p>
+          <div class="share-link my-2">
+            <div style="display: flex; align-items: center;">
+              <i class="fa-brands fa-whatsapp details-icon"></i>
+              <p class="button m-0"><a href="whatsapp://send?text=Check out this wonder: <%= @wonder_url %>">WhatsApp</a></p>
+            </div>
+          </div>
+
+          <div class="share-link my-2">
+            <div style="display: flex; align-items: center;">
+              <i class="fa-brands fa-facebook-messenger details-icon"></i>
+              <p class="button m-0"><a href="fb-messenger://share/?link=<%= @wonder_url %>">Messenger</a></p>
+            </div>
+          </div>
+
+          <div class="share-link my-2">
+            <div style="display: flex; align-items: center;">
+              <i class="fa-brands fa-instagram details-icon"></i>
+              <p class="button m-0"><a href="https://www.instagram.com/create/post/?url=<%= @wonder_url %>">Instagram</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>
