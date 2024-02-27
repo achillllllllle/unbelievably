@@ -2,6 +2,7 @@ class WondersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
+    # path = request.original_url
     @wonders = Wonder.all
   end
 
