@@ -15,12 +15,12 @@
         <%= f.label :book_date, class: 'form-label' do %>
           <i class="fa-solid fa-calendar"></i> Book a new date ?
         <% end %>
-        <%= f.input :book_date, label: false, as: :string, input_html: { data: { datepicker_target: "book_date" }, class: 'form-control' }, wrapper: false %>
+        <%= f.input :book_date, label: false, as: :date, input_html: { data: { datepicker_target: "book_date" }, class: 'form-control' }, wrapper: false %>
       </div>
 
       <div class="row">
         <div class="col-12">
-          <%= f.button :submit, "Send Live", class: "btn btn-primary btn-lg btn-block mt-3" %>
+          <%= f.button :submit, "Update your reservation !", class: "btn btn-primary btn-lg btn-block mt-3" %>
         </div>
       </div>
 
