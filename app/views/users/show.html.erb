@@ -22,16 +22,16 @@
                 <p><%= my_pending.price %> euros</p>
               </div>
               <div class="notification-actions">
-                <a href="#">Accept <i class="fa-solid fa-check"></i></a>
-                <a href="#">Refuse <i class="far fa-trash-alt"></i></a>
+                <%= link_to "Accept <i class='fa-solid fa-check'></i>".html_safe, reservation_path(my_pending), data: {turbo_method: 'patch', turbo_confirm: "You really want to accept this offer ?"} %>
+                <%= link_to "Refuse <i class='fa-solid fa-xmark'></i>".html_safe, reservation_path(my_pending), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this offer ?" } %>
               </div>
             </div>
           <% end %>
         <% end %>
       </div>
       <div class="notification-actions">
-        <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-        <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+        <%= link_to "Edit <i class='fas fa-pencil-alt'></i>".html_safe, edit_wonder_path(my_wonder) %>
+        <%= link_to "Delete <i class='far fa-trash-alt'></i>".html_safe, wonder_path(my_wonder), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this wonder !?"} %>
       </div>
     </div>
   <% end %>
@@ -48,8 +48,8 @@
           </div>
         <% end %>
       <div class="notification-actions">
-        <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-        <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+        <%= link_to "Edit <i class='fas fa-pencil-alt'></i>".html_safe, edit_reservation_path(my_reservation) %>
+        <%= link_to "Delete <i class='far fa-trash-alt'></i>".html_safe, reservation_path(my_reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete your reservation ?" } %>
       </div>
     </div>
   <% end %>

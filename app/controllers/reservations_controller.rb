@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  # creer methode juste pour la durer pour retourner un json pour qu'on puisse l'appeler en js pour rendre le dom dynamique
+  before_action :set_reservation, only: %i[edit update destroy]
 
   def create
     @wonder = Wonder.find(params[:wonder_id])
@@ -17,9 +17,30 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if current_user == @reservation.wonder.user #si c'est le proprio
+      @reservation.update(accepted: true)
+      redirect_to user_path(current_user)
+    else
+
+    end
+  end
+
+  def destroy
+    @reservation.destroy
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def reservation_params
     params.require(:reservation).permit(:user_id, :wonder_id, :book_date, :nb_participants, :price, :accepted)
+  end
+
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
   end
 end

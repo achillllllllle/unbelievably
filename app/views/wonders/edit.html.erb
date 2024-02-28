@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="col-md-4">
+    <h3 class="fw-bold text-primary">Start Your Magical Journey</h3>
+    <%= simple_form_for @wonder, html: { class: 'form-horizontal' } do |f| %>
+
+      <!-- Title Field -->
+      <div class="form-group mb-3">
+        <%= f.label :title, class: 'form-label' do %>
+          <i class="fa fa-tag"></i> Title
+          <small>(The name of your wonder)</small>
+        <% end %>
+        <%= f.input :title, label: false, placeholder: 'Magical Treehouse, Enchanted Night...', input_html: { class: 'form-control' }, wrapper: false %>
+      </div>
+
+      <!-- Price Per Day Field -->
+      <div class="form-group mb-3">
+        <%= f.label :price_per_participant, class: 'form-label' do %>
+          <i class="fa fa-dollar-sign"></i> Price / Day
+          <small>(How much does it cost per day?)</small>
+        <% end %>
+        <%= f.input :price_per_participant, label: false, placeholder: '100', as: :float, input_html: { class: 'form-control' }, wrapper: false %>
+      </div>
+
+      <!-- Category Field -->
+      <div class="form-group mb-3">
+        <%= f.label :category, class: 'form-label' do %>
+          <i class="fa fa-cogs"></i> Category
+          <small>(The category of your wonder)</small>
+        <% end %>
+        <%= f.input :category, label: false, placeholder: 'Adventure, Mystery...', input_html: { class: 'form-control' }, wrapper: false %>
+      </div>
+
+      <!-- Location Field -->
+      <div class="form-group mb-3">
+        <%= f.label :location, class: 'form-label' do %>
+          <i class="fa fa-map-marker-alt"></i> Location
+          <small>(Where is your wonder located?)</small>
+        <% end %>
+        <%= f.input :location, label: false, placeholder: 'Enchanted Forest, Dreamy Castle...', input_html: { class: 'form-control' }, wrapper: false %>
+      </div>
+
+      <!-- Details/Content Field -->
+      <div class="form-group mb-3">
+        <%= f.label :content, class: 'form-label' do %>
+          <i class="fa fa-align-left"></i> Details
+          <small>(Describe what makes your wonder special)</small>
+        <% end %>
+        <%= f.input :content, label: false, placeholder: 'The essence of your wonder...', as: :text, input_html: { class: 'form-control', rows: 4 }, wrapper: false %>
+      </div>
+
+      <!-- Photos Field -->
+      <div class="form-group mb-3">
+        <%= f.label :content, class: 'form-label' do %>
+          <i class="fa fa-image"></i>
+        <% end %>
+        <%= f.input :photos, as: :file, input_html: { class: 'form-control', rows: 4, multiple: true }, wrapper: false %>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <%= f.button :submit, "Send Live", class: "btn btn-primary btn-lg btn-block mt-3" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
