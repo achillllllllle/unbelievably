@@ -1,15 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="tabs"
 export default class extends Controller {
-  static targets = ["content"]
+  static targets = ["tabContent"];
 
   connect() {
-    console.log("Hello from tabs_controller.js");
+    console.log("Helloooooooooo")
   }
 
   toggle(event) {
     event.preventDefault();
-    this.contentTargets.forEach(target => target.classList.toggle("d-none"));
+
+    const targetTabId = event.target.hash.substring(1);
+
+    this.tabContentTargets.forEach((tabContent) => {
+      tabContent.style.display = "none";
+    });
+
+    if (targetTabId === "wonders") {
+      document.getElementById("reservations").classList.add("d-none")
+      document.getElementById("wonders").classList.remove("d-none")
+
+    } else {
+      document.getElementById("reservations").classList.remove("d-none")
+      document.getElementById("wonders").classList.add("d-none")
+    }
+
+    document.getElementById(targetTabId).style.display = "block";
   }
 }
