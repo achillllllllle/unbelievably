@@ -22,8 +22,8 @@
                 <p><%= my_pending.price %> euros</p>
               </div>
               <div class="notification-actions">
-                <a href="#">Accept <i class="fa-solid fa-check"></i></a>
-                <a href="#">Refuse <i class="far fa-trash-alt"></i></a>
+                <%= link_to "Accept <i class='fa-solid fa-check'></i>".html_safe, reservation_path(my_pending), data: {turbo_method: 'patch', turbo_confirm: "Are you sure ?"} %>
+                <%= link_to "Refuse <i class='fa-solid fa-xmark'></i>".html_safe, reservation_path(my_pending), data: {turbo_method: 'delete', turbo_confirm: "Are you sure ?" } %>
               </div>
             </div>
           <% end %>
