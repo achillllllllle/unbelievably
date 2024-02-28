@@ -25,8 +25,11 @@
               </div>
             </div>
             <h2 class="card-wonder-pricing"><%= wonder.price_per_participant.to_i  %>€</h2>
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
-          </div>
+              <% if current_user.avatar.attached? %>
+                <%= cl_image_tag current_user.avatar.key, crop: :fill, class: "card-wonder-user avatar-bordered" %>
+              <% else %>
+                <%= image_tag "avatar.jpeg", class: "card-wonder-user avatar-bordered" %>
+              <% end %>          </div>
         </div>
       <% end %>
     <% end %>

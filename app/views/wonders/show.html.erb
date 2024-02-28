@@ -41,10 +41,13 @@
         <div class="user d-flex align-items-center justify-content-between py-3">
         <div class="d-flex">
           <div class="avatar-pic">
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="avatar-show" />
-          </div>
+            <% if current_user.avatar.attached? %>
+              <%= cl_image_tag current_user.avatar.key, crop: :fill, class: "avatar-show", alt: "dropdown menu" %>
+            <% else %>
+              <%= image_tag "avatar.jpeg", class: "avatar-show", alt: "dropdown menu" %>
+            <% end %>          </div>
           <div class="user-details">
-            <p class="user-name mb-1 pl-1">User : <strong><%= @wonder.user.username %></strong></p>
+            <p class="user-name mb-1 pl-1">Proposed by: <strong><%= @wonder.user.username %></strong></p>
             <p class="button text-secondary mb-1">Send a message</p>
         </div>
         </div>
@@ -86,7 +89,7 @@
           <div class="card-body">
             <div class="price d-flex align-items-center pb-3">
               <i class="fa-solid fa-tag details-icon"></i>
-              <h5 class="mb-0"><strong><%= @wonder.price_per_participant %>€</strong> per participant</h5>
+              <h5 class="mb-0"><strong><%= @wonder.price_per_participant.to_i %>€</strong> per participant</h5>
             </div>
 
             <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
