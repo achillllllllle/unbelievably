@@ -15,12 +15,21 @@
                 <h2><%= wonder.title %></h2>
               </div>
               <p><%= wonder.content %></p>
-              <p><%= wonder.location %></p>
-              <p><%= wonder.category %></p>
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-location-dot fa-xs me-2 text-secondary"></i>
+                <p><%= wonder.location %></p>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-tag fa-xs me-2 text-secondary"></i>
+                <p><%= wonder.category %></p>
+              </div>
             </div>
-            <h2 class="card-wonder-pricing"><%= wonder.price_per_participant  %>€</h2>
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
-          </div>
+            <h2 class="card-wonder-pricing"><%= wonder.price_per_participant.to_i  %>€</h2>
+              <% if current_user.avatar.attached? %>
+                <%= cl_image_tag current_user.avatar.key, crop: :fill, class: "card-wonder-user avatar-bordered" %>
+              <% else %>
+                <%= image_tag "avatar.jpeg", class: "card-wonder-user avatar-bordered" %>
+              <% end %>          </div>
         </div>
       <% end %>
     <% end %>
