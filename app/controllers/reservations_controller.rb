@@ -25,7 +25,12 @@ class ReservationsController < ApplicationController
       @reservation.update(accepted: true)
       redirect_to user_path(current_user)
     else
-
+      @price_per_participant = @reservation.wonder.price_per_participant
+      @quantity = reservation_params[:nb_participants].to_i
+      @price = @quantity * @price_per_participant
+      @reservation.price = @price
+      @reservation.update(reservation_params)
+      redirect_to user_path(@reservation.user)
     end
   end
 
