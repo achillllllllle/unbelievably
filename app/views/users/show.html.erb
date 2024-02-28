@@ -48,8 +48,8 @@
           </div>
         <% end %>
       <div class="notification-actions">
-        <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-        <a href="#">Delete <i class="far fa-trash-alt"></i></a>
+        <%= link_to "Edit <i class='fas fa-pencil-alt'></i>".html_safe, edit_reservation_path(my_reservation) %>
+        <%= link_to "Delete <i class='far fa-trash-alt'></i>".html_safe, reservation_path(my_reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete your reservation ?" } %>
       </div>
     </div>
   <% end %>

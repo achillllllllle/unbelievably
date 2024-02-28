@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: %i[update destroy]
+  before_action :set_reservation, only: %i[edit update destroy]
 
   def create
     @wonder = Wonder.find(params[:wonder_id])
@@ -17,15 +17,21 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
-    @reservation.update(accepted: true)
-    redirect_to user_path(@reservation.wonder.user)
+    if current_user == @reservation.wonder.user #si c'est le proprio
+      @reservation.update(accepted: true)
+      redirect_to user_path(current_user)
+    else
+
+    end
   end
 
   def destroy
-    owner = @reservation.wonder.user
     @reservation.destroy
-    redirect_to user_path(owner)
+    redirect_to user_path(current_user)
   end
 
   private
