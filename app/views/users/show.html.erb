@@ -113,16 +113,26 @@
                 <td class="text-center" style="vertical-align: middle;">
                     <% if reservation.accepted? %>
                       <p class="text-success mb-0"><small>Accepted</small></p>
-                    <% elsif reservation.accepted = false %>
+                    <% elsif !reservation.accepted? %>
                       <p class="text-danger mb-0"><small>Refused</small></p>
                     <% else %>
                       <p class="text-warning mb-0"><small>Pending</small></p>
                     <% end %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                  <!-- Ajouter des actions pour la réservation, comme modifier ou annuler -->
+                  <div class="notification-actions">
+                    <!--Add the link_to-->
+                      <i class="fas fa-pencil-alt"></i> Edit
+                    <!--Add the link_to-->
+                      <i class="far fa-trash-alt"></i> Delete
+                  </div>
                 </td>
               </tr>
+
+              <tr>
+                <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
+              </tr>
+
             <% end %>
           </tbody>
         </table>
