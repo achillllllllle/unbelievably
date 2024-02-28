@@ -3,5 +3,5 @@ class Wonder < ApplicationRecord
   belongs_to :user
   has_many_attached :photos
 
-  validates :title, :price_per_day, :location, :category, presence: true
+  validates :title, :price_per_participant, :location, :category, presence: true
 end

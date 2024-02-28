@@ -6,9 +6,9 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
     @reservation.wonder = @wonder
-    @price_per_day = @wonder.price_per_day
-    @duration = reservation_params[:end_date].to_date - reservation_params[:start_date].to_date + 1
-    @price = @duration * @price_per_day
+    @price_per_participant = @wonder.price_per_participant
+    @quantity = reservation_params[:nb_participants].to_i
+    @price = @quantity * @price_per_participant
     @reservation.price = @price
     if @reservation.save
       redirect_to user_path(current_user)
@@ -20,6 +20,6 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:user_id, :wonder_id, :start_date, :end_date, :price, :accepted)
+    params.require(:reservation).permit(:user_id, :wonder_id, :book_date, :nb_participants, :price, :accepted)
   end
 end
