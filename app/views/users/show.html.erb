@@ -54,7 +54,9 @@
             <tr>
               <td colspan="4">
                 <div data-controller="toggle">
-                  <button data-action="click->toggle#offer" class="button pb-2" data-target="toggle.icon"><i class="fa-solid fa-chevron-down"></i> See offers</button>
+                  <button data-action="click->toggle#offer" class="button pb-2 button-with-chevron" data-target="toggle.icon">
+                    <i class="fa-solid fa-chevron-down"></i> See offers
+                  </button>
                   <div data-toggle-target="togglableElement" class="d-none">
                     <%= render "offer", my_reservations: my_wonder.reservations %>
                   </div>

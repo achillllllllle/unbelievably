@@ -15,7 +15,8 @@ export default class extends Controller {
 
   toggleIcon(button) {
     const icon = this.iconTarget;
-    icon.classList.toggle("fa-chevron-down");
-    icon.classList.toggle("fa-chevron-up");
+    icon.classList.toggle('active')
+    // icon.classList.toggle("fa-chevron-down");
+    // icon.classList.toggle("fa-chevron-up");
   }
 }

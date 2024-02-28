@@ -15,8 +15,20 @@
       </div>
       <div class="col-md-2">
         <div class="notification-actions">
-          <%= link_to "Accept <i class='fa-solid fa-check'></i>".html_safe, reservation_path(my_pending), data: {turbo_method: 'patch', turbo_confirm: "You really want to accept this offer ?"} %>
-          <%= link_to "Refuse <i class='fa-solid fa-xmark'></i>".html_safe, reservation_path(my_pending), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this offer ?" } %>
+          <%= link_to "Accept <i class='fa-solid fa-check ms-2'></i>".html_safe,
+                      reservation_path(my_pending),
+                      class: "align-items-center d-flex",
+                      data: {
+                        turbo_method: 'patch',
+                        turbo_confirm: "You really want to accept this offer ?"
+                      } %>
+          <%= link_to "Refuse <i class='fa-solid fa-xmark ms-2'></i>".html_safe,
+                      reservation_path(my_pending),
+                      class: "align-items-center d-flex",
+                      data: {
+                        turbo_method: 'delete',
+                        turbo_confirm: "You really want to delete this offer ?"
+                      } %>
         </div>
       </div>
     </div>

@@ -23,3 +23,14 @@
   color: white;
   background: linear-gradient(to right, #8E44AE 0%, #563194 100%)
 }
+
+.button-with-chevron {
+  i {
+    transition: transform 0.35s ease;
+  }
+  &.active {
+    i {
+      transform: rotate(180deg);
+    }
+  }
+}
