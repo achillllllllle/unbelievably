@@ -1,57 +1,100 @@
 <div class="container">
-  <h1><%= @user.username %>'s Profile</h1>
+  <div class="my-4">
+    <h3>Welcome <strong><%= @user.username %> !</strong></h3>
+  </div>
 
-  <h2>All My Wonders</h2>
-  <% @my_wonders.each do |my_wonder| %>
-    <div class="notification">
-      <%= link_to wonder_path(my_wonder.id), class: 'text-decoration-none' do %>
-        <%= image_tag('thumbnail.jpeg',:class => "notification-photo") %>
-        <div class="notification-content">
-          <p><strong><%= my_wonder.title %></strong></p>
-          <p><%= my_wonder.content %></p>
-      <% end %>
-        <p><strong>Offers</strong></p>
-        <% my_wonder.reservations.each do |my_pending| %>
-          <%= link_to '#', class: 'text-decoration-none' do %>
-            <div class="notification">
-              <div class="notification-content">
-                <p><%= my_pending.user.username %></p>
-              </div>
-              <div class="notification-content">
-                <p>From <%= my_pending.start_date.strftime("%d/%m/%Y") %> To <%= my_pending.end_date.strftime("%d/%m/%Y") %></p>
-                <p><%= my_pending.price %> euros</p>
-              </div>
-              <div class="notification-actions">
-                <a href="#">Accept <i class="fa-solid fa-check"></i></a>
-                <a href="#">Refuse <i class="far fa-trash-alt"></i></a>
-              </div>
-            </div>
+  <ul id="tabs" class="list-inline tabs-underlined" data-controller="tabs">
+    <li>
+      <a href="#" class="tab-underlined active" data-action="click->tabs#toggle">My wonders</a>
+    </li>
+    <li>
+      <a href="#" class="tab-underlined" data-action="click->tabs#toggle">My reservations</a>
+    </li>
+  </ul>
+
+  <% if @my_wonders.any? %>
+    <div class="wonders-list my-5">
+      <h4>Your wonders</h4>
+
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th class="font-weight-bold text-secondary">my wonder</th>
+            <th class="font-weight-bold text-secondary text-center">price</th>
+            <th class="font-weight-bold text-secondary text-center">category</th>
+            <th class="font-weight-bold text-secondary text-center"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @my_wonders.each do |my_wonder| %>
+            <tr>
+              <td style="vertical-align: middle;">
+                <div>
+                  <%= image_tag('thumbnail.jpeg', :class => "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
+                  <div>
+                    <%= link_to my_wonder.title, wonder_path(my_wonder.id), class: 'text-decoration-none' %>
+                    <p class="text-secondary mb-0"><small><%= my_wonder.category %></small></p>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center" style="vertical-align: middle;">
+                <%= my_wonder.price_per_day %> €
+              </td>
+              <td class="text-center" style="vertical-align: middle;">
+                <%= my_wonder.category %>
+              </td>
+              <td class="text-center" style="vertical-align: middle;">
+                <div class="notification-actions">
+                  <%= link_to '#', class: 'text-decoration-none action-link' do %>
+                    <i class="fas fa-pencil-alt"></i> Edit
+                  <% end %>
+                  <%= link_to '#', class: 'text-decoration-none action-link' do %>
+                    <i class="far fa-trash-alt"></i> Delete
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="4">
+                <div data-controller="toggle">
+                  <button data-action="click->toggle#offer" class="button pb-2" data-target="toggle.icon"><i class="fa-solid fa-chevron-down"></i> See offers</button>
+                  <div data-toggle-target="togglableElement" class="d-none">
+                    <%= render "offer", my_reservations: @my_reservations %>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
+            </tr>
+
           <% end %>
-        <% end %>
-      </div>
-      <div class="notification-actions">
-        <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-        <a href="#">Delete <i class="far fa-trash-alt"></i></a>
-      </div>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="alert alert-info">
+      You have no wonders yet.
     </div>
   <% end %>
 
-  <h2>My Reservations</h2>
-  <% @my_reservations.each do |my_reservation| %>
-    <div class="notification">
-      <%= image_tag('thumbnail.jpeg',:class => "notification-photo") %>
-        <%= link_to '#', class: 'text-decoration-none' do %>
-          <div class="notification-content">
-            <p><%= my_reservation.wonder.title %></p>
-            <p><%= my_reservation.start_date.strftime("%d/%m/%Y") %></p>
-            <p><%= my_reservation.end_date.strftime("%d/%m/%Y") %></p>
-            <p><%= my_reservation.price %> euros</p>
-          </div>
+  <% if @my_reservations.any? %>
+    <div class="my-reservations-list my-5">
+      <h4>Your reservations</h4>
+      <ul>
+        <% @my_reservations.each do |reservation| %>
+          <li>
+            <!-- détails de la réservation -->
+          </li>
         <% end %>
-      <div class="notification-actions">
-        <a href="#">Edit <i class="fas fa-pencil-alt"></i></a>
-        <a href="#">Delete <i class="far fa-trash-alt"></i></a>
-      </div>
+      </ul>
+    </div>
+  <% else %>
+    <div class="alert alert-info">
+      You have no reservations yet.
     </div>
   <% end %>
+
 </div>
