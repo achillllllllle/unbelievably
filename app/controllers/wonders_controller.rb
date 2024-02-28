@@ -2,10 +2,10 @@ class WondersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    referrer = request.referrer
     if params["search"] && params["search"]["query"].present?
       # Logique à exécuter si la requête vient de l'URL spécifiée
-      query = params["search"]["query"]
+      query = params["search"]["query"].capitalize
+
       @wonders = Wonder.where("title LIKE ?", "%#{query}%")
       # Requette SQL =  SELECT * FROM wonders WHERE title LIKE 'params["search"]["query"]%';
     else

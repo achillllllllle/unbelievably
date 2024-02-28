@@ -15,6 +15,7 @@ export default class extends Controller {
         document.querySelector('#newWonderModal .modal-body').innerHTML = html
         var myModal = new bootstrap.Modal(document.getElementById('newWonderModal'))
         myModal.show()
+        console.log(myModal);
       })
   }
 }
