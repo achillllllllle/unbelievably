@@ -26,7 +26,6 @@ wonders_info = [
   { title: "Goblin Gourmet Night", price_per_day: 220, category: "Spectacle", location: "New York", content: "Experience fine dining with dishes prepared by the world-renowned Goblin chefs. Palate excitement guaranteed!", user: users.sample },
   { title: "Underwater Basket Weaving", price_per_day: 140, category: "Magical Item", location: "Great Barrier Reef", content: "Weave the finest baskets on a scuba dive with mermaids. Waterproof baskets and scuba gear provided.", user: users.sample },
   { title: "Zero-Gravity Tea Party", price_per_day: 500, category: "Adventure", location: "International Space Station", content: "Enjoy a cup of tea while floating in zero gravity. Spacesuit and transportation included.", user: users.sample },
-  # ... add more wonders here following the same structure
   { title: "Time Travel Excursion", price_per_day: 600, category: "Adventure", location: "Egypt", content: "Travel back in time to witness the construction of the pyramids. Historical accuracy not guaranteed.", user: users.sample },
   { title: "Invisibility Cloak Hide and Seek", price_per_day: 250, category: "Magical Item", location: "Hogwarts", content: "Play hide and seek in the Hogwarts castle, using genuine invisibility cloaks. Mischief managed!", user: users.sample },
   { title: "Leprechaun Gold Hunt", price_per_day: 250, category: "Adventure", location: "Ireland", content: "Hunt for leprechaun gold at the end of the rainbow. Shovels and raincoats provided.", user: users.sample },
@@ -35,7 +34,6 @@ wonders_info = [
   { title: "Antigravity Dance Party", price_per_day: 450, category: "Adventure", location: "Tokyo", content: "Dance the night away in an antigravity chamber. Glow sticks and moon boots provided.", user: users.sample },
   { title: "Telekinetic Chess Tournament", price_per_day: 100, category: "Magical Item", location: "Cambridge", content: "Play chess using only your mind. Training in telekinesis provided upon arrival.", user: users.sample },
   { title: "Broomstick Flying Lessons", price_per_day: 320, category: "Adventure", location: "Salem", content: "Learn to fly a broomstick with certified witch instructors. Helmets and knee pads included.", user: users.sample },
-  # ... continue adding wonders as needed
 ]
 
 wonders_info.each do |wonder_attrs|
