@@ -90,7 +90,7 @@
             <div class="price d-flex align-items-center pb-3">
               <i class="fa-solid fa-tag details-icon"></i>
               <h5 class="mb-0"><strong><%= @wonder.price_per_participant.to_i %>€</strong> per participant</h5>
-            </div>
+              </div>
 
             <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
               <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" } }, label: false, placeholder: 'For when?' %>
