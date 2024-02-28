@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   newWonder(event) {
-    console.log('newWonder');
     event.preventDefault();
 
     fetch('/wonders/new', {
@@ -15,7 +14,6 @@ export default class extends Controller {
         document.querySelector('#newWonderModal .modal-body').innerHTML = html
         var myModal = new bootstrap.Modal(document.getElementById('newWonderModal'))
         myModal.show()
-        console.log(myModal);
       })
   }
 }
