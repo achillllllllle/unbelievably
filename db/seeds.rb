@@ -58,22 +58,22 @@ user_wonder = []
 end
 
 reservations_info = [
-  { start_date: "2024-03-10", end_date: "2024-03-13", price: 500, user: user_wonder[0].first, wonder: user_wonder[0].last },
-  { start_date: "2024-06-10", end_date: "2024-06-13", price: 500, user: user_wonder[1].first, wonder: user_wonder[1].last },
-  { start_date: "2025-03-10", end_date: "2025-03-13", price: 500, user: user_wonder[2].first, wonder: user_wonder[2].last },
-  { start_date: "2024-03-23", end_date: "2024-03-26", price: 500, user: user_wonder[3].first, wonder: user_wonder[3].last },
-  { start_date: "2024-05-15", end_date: "2024-06-10", price: 500, user: user_wonder[4].first, wonder: user_wonder[4].last },
-  { start_date: "2025-09-10", end_date: "2026-02-13", price: 500, user: user_wonder[5].first, wonder: user_wonder[5].last },
-  { start_date: "2024-03-01", end_date: "2024-03-13", price: 500, user: user_wonder[6].first, wonder: user_wonder[6].last },
-  { start_date: "2024-03-10", end_date: "2024-03-18", price: 500, user: user_wonder[7].first, wonder: user_wonder[7].last },
-  { start_date: "2024-03-10", end_date: "2024-08-13", price: 500, user: user_wonder[8].first, wonder: user_wonder[8].last },
-  { start_date: "2024-09-10", end_date: "2025-03-13", price: 500, user: user_wonder[9].first, wonder: user_wonder[9].last },
-  { start_date: "2029-03-10", end_date: "2029-03-13", price: 500, user: user_wonder[10].first, wonder: user_wonder[10].last, },
-  { start_date: "2024-09-10", end_date: "2024-12-13", price: 500, user: user_wonder[11].first, wonder: user_wonder[11].last, },
-  { start_date: "2024-12-10", end_date: "2025-01-13", price: 500, user: user_wonder[12].first, wonder: user_wonder[12].last, },
-  { start_date: "2024-03-10", end_date: "2025-05-13", price: 500, user: user_wonder[13].first, wonder: user_wonder[13].last, },
-  { start_date: "2029-03-10", end_date: "2032-03-13", price: 500, user: user_wonder[14].first, wonder: user_wonder[14].last, },
-  { start_date: "2024-04-11", end_date: "2024-04-13", price: 500, user: user_wonder[15].first, wonder: user_wonder[15].last },
+  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[0].first, wonder: user_wonder[0].last },
+  { book_date: "2024-06-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[1].first, wonder: user_wonder[1].last },
+  { book_date: "2025-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[2].first, wonder: user_wonder[2].last },
+  { book_date: "2024-03-23", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[3].first, wonder: user_wonder[3].last },
+  { book_date: "2024-05-15", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[4].first, wonder: user_wonder[4].last },
+  { book_date: "2025-09-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[5].first, wonder: user_wonder[5].last },
+  { book_date: "2024-03-01", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[6].first, wonder: user_wonder[6].last },
+  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[7].first, wonder: user_wonder[7].last },
+  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[8].first, wonder: user_wonder[8].last },
+  { book_date: "2024-09-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[9].first, wonder: user_wonder[9].last },
+  { book_date: "2029-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[10].first, wonder: user_wonder[10].last, },
+  { book_date: "2024-09-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[11].first, wonder: user_wonder[11].last, },
+  { book_date: "2024-12-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[12].first, wonder: user_wonder[12].last, },
+  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[13].first, wonder: user_wonder[13].last, },
+  { book_date: "2029-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[14].first, wonder: user_wonder[14].last, },
+  { book_date: "2024-04-11", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[15].first, wonder: user_wonder[15].last },
 ]
 
 reservations_info.each do |reservation_attrs|
