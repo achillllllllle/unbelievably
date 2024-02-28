@@ -77,8 +77,8 @@
             </div>
 
             <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
-              <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startDates" } }, label: false, placeholder: 'Date de début' %>
-              <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endDates" } }, label: false, placeholder: 'Date de fin' %>
+              <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" } }, label: false, placeholder: 'For when?' %>
+              <%= f.input :nb_participants, as: :integer, label: 'And for how many?' %>
               <div class="d-grid">
                 <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3" %>
               </div>
