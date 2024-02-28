@@ -37,6 +37,6 @@ class WondersController < ApplicationController
   private
 
   def wonder_params
-    params.require(:wonder).permit(:title, :price_per_day, :type, :location, :category, :content, :user_id, :photos => [])
+    params.require(:wonder).permit(:title, :price_per_participant, :type, :location, :category, :content, :user_id, :photos => [])
   end
 end

@@ -6,9 +6,9 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
     @reservation.wonder = @wonder
-    @price_per_participants = @wonder.price_per_participants
-    @quantity = reservation_params[:nb_participants]
-    @price = @quantity * @price_per_participants
+    @price_per_participant = @wonder.price_per_participant
+    @quantity = reservation_params[:nb_participants].to_i
+    @price = @quantity * @price_per_participant
     @reservation.price = @price
     if @reservation.save
       redirect_to user_path(current_user)
