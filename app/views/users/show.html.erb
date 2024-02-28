@@ -41,10 +41,10 @@
               </td>
               <td class="text-center" style="vertical-align: middle;">
                 <div class="notification-actions">
-                  <%= link_to '#', class: 'text-decoration-none action-link' do %>
+                  <%= link_to edit_wonder_path(my_wonder), class: 'text-decoration-none action-link' do %>
                     <i class="fas fa-pencil-alt"></i> Edit
                   <% end %>
-                  <%= link_to '#', class: 'text-decoration-none action-link' do %>
+                  <%= link_to wonder_path(my_wonder), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this wonder !?"}, class: 'text-decoration-none action-link' do %>
                     <i class="far fa-trash-alt"></i> Delete
                   <% end %>
                 </div>
