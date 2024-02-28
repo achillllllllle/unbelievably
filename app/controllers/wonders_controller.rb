@@ -1,13 +1,17 @@
 class WondersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_wonder, only: %i[show edit update destroy]
 
   def index
-    # path = request.original_url
-    @wonders = Wonder.all
+    if params["search"] && params["search"]["query"].present?
+      query = params["search"]["query"].capitalize
+      @wonders = Wonder.where("title LIKE ?", "%#{query}%")
+    else
+      @wonders = Wonder.all
+    end
   end
 
   def show
-    @wonder = Wonder.find(params[:id])
     @reservation = Reservation.new
   end
 
@@ -25,9 +29,27 @@ class WondersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @wonder.update(wonder_params)
+    redirect_to user_path(@wonder.user)
+  end
+
+  def destroy
+    owner = @wonder.user
+    @wonder.destroy
+    redirect_to user_path(owner)
+  end
+
   private
 
+  def set_wonder
+    @wonder = Wonder.find(params[:id])
+  end
+
   def wonder_params
-    params.require(:wonder).permit(:title, :price_per_day, :type, :location, :category, :content, :user_id)
+    params.require(:wonder).permit(:title, :price_per_participant, :type, :location, :category, :content, :user_id, :photos => [])
   end
 end

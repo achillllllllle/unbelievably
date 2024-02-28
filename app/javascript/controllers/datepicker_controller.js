@@ -3,10 +3,10 @@ import flatpickr from "flatpickr";
 
 // Connects to data-controller="datepicker"
 export default class extends Controller {
-  static targets = ["startDates", "endDates"];
+  static targets = ["book_date"];
 
   connect() {
-    flatpickr(this.startDatesTarget, { dateFormat: "d-m-Y", minDate: "today" });
-    flatpickr(this.endDatesTarget, { dateFormat: "d-m-Y", minDate: "today" });
+    flatpickr(this.book_dateTarget, { dateFormat: "d-m-Y", minDate: "today" });
   }
+
 }

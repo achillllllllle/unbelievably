@@ -2,21 +2,27 @@
 <div class="container">
   <div class="cards mt-4">
     <% @wonders.each do |wonder| %>
-    <div class="card-wonder">
-      <%= image_tag('thumbnail.jpeg') %>
-      <div class="card-wonder-infos">
-        <div>
-          <div class="class text-decoration-none">
-            <h2><%= link_to wonder.title, wonder_path(wonder) %></h2>
+      <%= link_to wonder_path(wonder), class: "text-decoration-none" do %>
+        <div class="card-wonder">
+          <% if wonder.photos.attached? %>
+            <%= cl_image_tag wonder.photos.first.key, height: 300, width: 400, crop: :fill, class: "card-wonder-img" %>
+          <% else %>
+            <%= image_tag("thumbnail.jpeg") %>
+          <% end %>
+          <div class="card-wonder-infos">
+            <div>
+              <div class="class">
+                <h2><%= wonder.title %></h2>
+              </div>
+              <p><%= wonder.content %></p>
+              <p><%= wonder.location %></p>
+              <p><%= wonder.category %></p>
+            </div>
+            <h2 class="card-wonder-pricing"><%= wonder.price_per_participant  %>€</h2>
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
           </div>
-          <p><%= wonder.content %></p>
-          <p><%= wonder.location %></p>
-          <p><%= wonder.category %></p>
         </div>
-        <h2 class="card-wonder-pricing"><%= wonder.price_per_day  %></h2>
-        <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-wonder-user avatar-bordered" />
-      </div>
-    </div>
+      <% end %>
     <% end %>
   </div>
 </div>
