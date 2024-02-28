@@ -29,7 +29,11 @@
             <% @my_wonders.each do |my_wonder| %>
               <tr>
                 <td style="vertical-align: middle;">
-                  <%= image_tag('thumbnail.jpeg', :class => "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
+                  <% if my_wonder.photos.attached? %>
+                    <%= cl_image_tag my_wonder.photos.first.key, height: 100, width: 100, crop: :fill, class: "notification-photo", style: "float: left; margin-right: 20px;" %>
+                  <% else %>
+                    <%= image_tag("thumbnail.jpeg", class: "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
+                  <% end %>
                   <%= link_to my_wonder.title, wonder_path(my_wonder.id), class: 'text-decoration-none' %>
                   <p class="text-secondary mb-0"><small><%= my_wonder.category %></small></p>
                 </td>
@@ -93,8 +97,12 @@
             <% @my_reservations.each do |reservation| %>
               <tr>
                 <td style="vertical-align: middle;">
-                  <%= image_tag('thumbnail.jpeg', :class => "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
-                  <%= link_to "Reservation ##{reservation.id}", reservation_path(reservation.id), class: 'text-decoration-none' %>
+                  <% if reservation.wonder.photos.attached? %>
+                    <%= cl_image_tag reservation.wonder.photos.first.key, height: 100, width: 100, crop: :fill, class: "notification-photo", style: "float: left; margin-right: 20px;" %>
+                  <% else %>
+                    <%= image_tag("thumbnail.jpeg", class: "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
+                  <% end %>
+                  <%= link_to "Request #{reservation.wonder.title}", reservation_path(reservation.wonder.title), class: 'text-decoration-none' %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <p class="text-secondary mb-0"><small><%= reservation.book_date %></small></p>
@@ -103,12 +111,28 @@
                   <p class="text-secondary mb-0"><small><%= reservation.nb_participants %> participants</small></p>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                  <!-- Afficher le statut de la réservation -->
+                    <% if reservation.accepted? %>
+                      <p class="text-success mb-0"><small>Accepted</small></p>
+                    <% elsif !reservation.accepted? %>
+                      <p class="text-danger mb-0"><small>Refused</small></p>
+                    <% else %>
+                      <p class="text-warning mb-0"><small>Pending</small></p>
+                    <% end %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                  <!-- Ajouter des actions pour la réservation, comme modifier ou annuler -->
+                  <div class="notification-actions">
+                    <!--Add the link_to-->
+                      <i class="fas fa-pencil-alt"></i> Edit
+                    <!--Add the link_to-->
+                      <i class="far fa-trash-alt"></i> Delete
+                  </div>
                 </td>
               </tr>
+
+              <tr>
+                <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
+              </tr>
+
             <% end %>
           </tbody>
         </table>
