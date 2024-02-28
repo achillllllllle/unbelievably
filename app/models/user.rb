@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
 
   # Validation
-  validate :avatar_presence
+  # validate :avatar_presence
   validates :username, :phone, :birth_date, presence: true
   validates :username, format: { with: /[a-z0-9_-]{3,15}/ }
   validates :username, :email, :phone, uniqueness: true
