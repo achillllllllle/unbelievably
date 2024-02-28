@@ -5,6 +5,7 @@ Wonder.destroy_all
 
 puts "Creating users..."
 users_info = [
+  { email: "test@test.com", password: "azerty", username: "TestUser", phone: "01 28 45 67 89", birth_date: "1971-10-31" },
   { email: "wizard@magicworld.com", password: "spellbound", username: "WizardWally", phone: "01 23 45 67 89", birth_date: "1970-10-31" },
   { email: "fairy@enchantedforest.com", password: "pixiedust", username: "FairyFiona", phone: "+33 2 34 56 78 90", birth_date: "1985-05-04" },
   { email: "sorcerer@apprentice.com", password: "magicwand", username: "SorcererSam", phone: "0033 3 45 67 89 01", birth_date: "1990-12-24" },
