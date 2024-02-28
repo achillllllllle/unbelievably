@@ -1,22 +1,17 @@
 class WondersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_wonder, only: %i[show edit update destroy]
 
   def index
     if params["search"] && params["search"]["query"].present?
-      # Logique à exécuter si la requête vient de l'URL spécifiée
       query = params["search"]["query"].capitalize
-
       @wonders = Wonder.where("title LIKE ?", "%#{query}%")
-      # Requette SQL =  SELECT * FROM wonders WHERE title LIKE 'params["search"]["query"]%';
     else
-      # Logique par défaut si la requête ne vient pas de l'URL spécifiée
       @wonders = Wonder.all
     end
-
   end
 
   def show
-    @wonder = Wonder.find(params[:id])
     @reservation = Reservation.new
   end
 
@@ -34,7 +29,25 @@ class WondersController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    @wonder.update(wonder_params)
+    redirect_to user_path(@wonder.user)
+  end
+
+  def destroy
+    owner = @wonder.user
+    @wonder.destroy
+    redirect_to user_path(owner)
+  end
+
   private
+
+  def set_wonder
+    @wonder = Wonder.find(params[:id])
+  end
 
   def wonder_params
     params.require(:wonder).permit(:title, :price_per_participant, :type, :location, :category, :content, :user_id, :photos => [])
