@@ -176,24 +176,8 @@
                 <td class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
                     <%= link_to edit_wonder_path(my_wonder), class: 'text-decoration-none action-link' do %>
-                      <i class="fas fa-pencil-alt"></i> Edit
+                      <i class="fas fa-pencil-alt"></i> Show
                     <% end %>
-                    <%= link_to wonder_path(my_wonder), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this wonder !?"}, class: 'text-decoration-none action-link' do %>
-                      <i class="far fa-trash-alt"></i> Delete
-                    <% end %>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td colspan="4">
-                  <div data-controller="toggle">
-                    <button data-action="click->toggle#offer" class="button pb-2 button-with-chevron" data-target="toggle.icon">
-                      <i class="fa-solid fa-chevron-down"></i> See offers
-                    </button>
-                    <div data-toggle-target="togglableElement" class="d-none">
-                      <%= render "offer", my_reservations: my_wonder.reservations %>
-                    </div>
                   </div>
                 </td>
               </tr>
