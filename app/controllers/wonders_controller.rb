@@ -13,6 +13,11 @@ class WondersController < ApplicationController
 
   def show
     @reservation = Reservation.new
+    @marker =
+      {
+        lat: @wonder.latitude,
+        lng: @wonder.longitude
+      }
   end
 
   def new
@@ -41,6 +46,11 @@ class WondersController < ApplicationController
     owner = @wonder.user
     @wonder.destroy
     redirect_to user_path(owner)
+  end
+
+  def save_favorite
+    @wonder = Wonder.find(params[:id])
+    current_user.favorites << @wonder
   end
 
   private

@@ -14,7 +14,7 @@
     <%= simple_form_for @wonder, html: { class: 'form-horizontal' } do |f| %>
 
       <!-- Title Field -->
-      <div class="form-group mb-3">
+      <div  class="form-group mb-3">
         <%= f.label :title, class: 'form-label' do %>
           <i class="fa fa-tag"></i> Title
           <small>(The name of your wonder)</small>
@@ -23,12 +23,13 @@
       </div>
 
       <!-- Price Per Day Field -->
-      <div class="form-group mb-3">
+      <div data-controller="range" class="form-group mb-3">
         <%= f.label :price_per_participant, class: 'form-label' do %>
           <i class="fa fa-dollar-sign"></i> Price / Day
           <small>(How much does it cost per day?)</small>
         <% end %>
-        <%= f.input :price_per_participant, label: false, placeholder: '100', as: :float, input_html: { class: 'form-control' }, wrapper: false %>
+        <%=  f.input :price_per_participant, as: :range, label: false, input_html: { class: 'form-control', min: 1, max: 100000, value: 1, data: { action: "input->range#performValueFromNew"} } %>
+        <span data-range-target="valueDisplayFromNew"> 1 €  </span>
       </div>
 
       <!-- Category Field -->
@@ -40,13 +41,16 @@
         <%= f.input :category, label: false, placeholder: 'Adventure, Mystery...', input_html: { class: 'form-control' }, wrapper: false %>
       </div>
 
-      <!-- Location Field -->
       <div class="form-group mb-3">
         <%= f.label :location, class: 'form-label' do %>
           <i class="fa fa-map-marker-alt"></i> Location
           <small>(Where is your wonder located?)</small>
         <% end %>
-        <%= f.input :location, label: false, placeholder: 'Enchanted Forest, Dreamy Castle...', input_html: { class: 'form-control' }, wrapper: false %>
+        <%= f.input :location,
+            input_html: {data: {location_autocomplete_target: "location"}, class: "d-none" },
+            label: false,
+            wrapper_html: {data: {controller: "location-autocomplete", location_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+        %>
       </div>
 
       <!-- Details/Content Field -->

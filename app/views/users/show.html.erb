@@ -120,18 +120,22 @@
                   <% else %>
                     <%= image_tag("thumbnail.jpeg", class: "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
                   <% end %>
-                  <%= link_to "Request #{reservation.wonder.title}", reservation_path(reservation.wonder.title), class: 'text-decoration-none' %>
+                  <%= link_to "Request #{reservation.wonder.title}", wonder_path(reservation.wonder.id), class: 'text-decoration-none' %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <p class="text-secondary mb-0"><small><%= reservation.book_date %></small></p>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                  <p class="text-secondary mb-0"><small><%= reservation.nb_participants %> participants</small></p>
+                  <% if reservation.nb_participants > 1 %>
+                    <p class="text-secondary mb-0"><small><%= reservation.nb_participants %> participants</small></p>
+                  <% else %>
+                    <p class="text-secondary mb-0"><small><%= reservation.nb_participants %> participant</small></p>
+                  <% end %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                     <% if reservation.accepted? %>
                       <p class="text-success mb-0"><small>Accepted</small></p>
-                    <% elsif !reservation.accepted? %>
+                    <% elsif !reservation.accepted.nil? %>
                       <p class="text-danger mb-0"><small>Refused</small></p>
                     <% else %>
                       <p class="text-warning mb-0"><small>Pending</small></p>
@@ -139,9 +143,8 @@
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
-                    <!--Add the link_to-->
                     <%= link_to "Edit <i class='fas fa-pencil-alt'></i>".html_safe, edit_reservation_path(reservation) %>
-                    <%= link_to "Delete <i class='far fa-trash-alt'></i>".html_safe, reservation_path(reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete your reservation ?" } %>
+                    <%= link_to "Cancel <i class='far fa-trash-alt'></i>".html_safe, reservation_path(reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to cancel your reservation ?" } %>
                   </div>
                 </td>
               </tr>
@@ -158,45 +161,43 @@
   </div>
 
   <div id="saved" class="tab-content" data-tabs-target="tabContent">
-    <% if @my_reservations.any? %>
-      <div class="reservations-list my-5">
-
+    <% if @favorites.any? %>
+      <div class="saved-list my-5">
         <table class="table table-borderless">
           <thead>
             <tr>
-              <th class="font-weight-bold text-secondary">saved wonder</th>
-              <th class="font-weight-bold text-secondary text-center">price</th>
-              <th class="font-weight-bold text-secondary text-center">category</th>
+              <th class="font-weight-bold text-secondary">Saved wonder</th>
+              <th class="font-weight-bold text-secondary text-center">Price</th>
+              <th class="font-weight-bold text-secondary text-center">Category</th>
               <th class="font-weight-bold text-secondary text-center"></th>
             </tr>
           </thead>
           <tbody>
-            <% @my_wonders.each do |my_wonder| %>
+            <% @favorites.reverse.each do |favorite| %>
+              <% wonder = favorite.wonder %>
               <tr>
                 <td style="vertical-align: middle;">
-                  <% if my_wonder.photos.attached? %>
-                    <%= cl_image_tag my_wonder.photos.first.key, height: 100, width: 100, crop: :fill, class: "notification-photo", style: "float: left; margin-right: 20px;" %>
+                  <% if wonder.photos.attached? %>
+                    <%= cl_image_tag wonder.photos.first.key, height: 100, width: 100, crop: :fill, class: "notification-photo", style: "float: left; margin-right: 20px;" %>
                   <% else %>
                     <%= image_tag("thumbnail.jpeg", class: "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
                   <% end %>
-                  <%= link_to my_wonder.title, wonder_path(my_wonder.id), class: 'text-decoration-none' %>
-                  <p class="text-secondary mb-0"><small><%= my_wonder.category %></small></p>
+                  <%= link_to wonder.title, wonder_path(wonder.id), class: 'text-decoration-none' %>
+                  <p class="text-secondary mb-0"><small><%= wonder.category %></small></p>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                  <%= my_wonder.price_per_participant %> €
+                  <%= wonder.price_per_participant %> €
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                  <%= my_wonder.category %>
+                  <%= wonder.category %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
-                    <%= link_to wonder_path(my_wonder), class: 'text-decoration-none action-link' do %>
-                      <i class="fa-regular fa-eye"></i> Show
-                    <% end %>
+                    <%= link_to "Unsaved <i class='far fa-trash-alt'></i>".html_safe, wonder_favorite_path(wonder, favorite), method: :delete, data: {turbo_method: 'delete', turbo_confirm: "Unsave this wonder?" } %>
+
                   </div>
                 </td>
               </tr>
-
               <tr>
                 <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
               </tr>
@@ -205,6 +206,7 @@
         </table>
       </div>
     <% else %>
+      <p class="my-5">No saved wonders yet!</p>
     <% end %>
   </div>
 

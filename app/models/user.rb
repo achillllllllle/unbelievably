@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :reservations, dependent: :destroy
   has_many :reservations
   has_many :wonders, dependent: :destroy
+  has_many :favorites
   has_one_attached :avatar
 
   devise :database_authenticatable, :registerable,
