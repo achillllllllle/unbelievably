@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["tabContent", "tabLink"];
 
   connect() {
-    console.log("Helloooooooooo")
     this.showTab("wonders");
   }
 
