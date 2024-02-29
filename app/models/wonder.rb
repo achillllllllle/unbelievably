@@ -6,5 +6,4 @@ class Wonder < ApplicationRecord
 
   after_validation :geocode, if: :will_save_change_to_location?
   validates :title, :price_per_participant, :location, :category, presence: true
-  # validates :title, price_per_participant
 end
