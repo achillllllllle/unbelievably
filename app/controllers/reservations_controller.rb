@@ -11,6 +11,7 @@ class ReservationsController < ApplicationController
     @price = @quantity * @price_per_participant
     @reservation.price = @price
     if @reservation.save
+      raise
       redirect_to user_path(current_user)
     else
       redirect_to wonder_path(@wonder), alert: "Can't create reservation, check informations and try again"

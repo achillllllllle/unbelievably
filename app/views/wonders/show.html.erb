@@ -86,7 +86,7 @@
     <div class="col-md-4 col-sm-12">
       <div class="booking-container p-4">
         <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
-          <div class="card-body">
+          <div data-controller="range" class="card-body">
             <div class="price d-flex align-items-center pb-3">
               <i class="fa-solid fa-tag details-icon"></i>
               <h5 class="mb-0"><strong><%= @wonder.price_per_participant.to_i %>€</strong> per participant</h5>
@@ -94,7 +94,10 @@
 
             <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
               <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" } }, label: false, placeholder: 'For when?' %>
-              <%= f.input :nb_participants, as: :integer, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10 } %>
+
+
+              <%=  f.input :nb_participants, as: :range, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10, value: 1, data: { action: "input->range#performValue"} } %>
+              <span data-range-target="valueDisplay"> 1 people </span>
               <div class="d-grid">
                 <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3" %>
               </div>
