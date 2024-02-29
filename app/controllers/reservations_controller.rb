@@ -4,6 +4,11 @@ class ReservationsController < ApplicationController
   def create
     @wonder = Wonder.find(params[:wonder_id])
     @reservation = Reservation.new(reservation_params)
+
+    @reservation.pending?
+    @reservation.accepted?
+    @reservation.refused?
+
     @reservation.user = current_user
     @reservation.wonder = @wonder
     @price_per_participant = @wonder.price_per_participant
