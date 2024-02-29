@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["togglableElement", "icon"]
 
   connect() {
-    console.log("Hello from toggle_controller.js")
   }
 
   offer() {
