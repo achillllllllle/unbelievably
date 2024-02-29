@@ -2,9 +2,13 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="range"
 export default class extends Controller {
-  static targets = ["valueDisplay"];
+  static targets = ["valueDisplayFromShow", "valueDisplayFromNew"];
 
-  performValue(e) {
-   this.valueDisplayTarget.textContent = e.currentTarget.value + " people";
+
+  performValueFromShow(e) {
+   this.valueDisplayFromShowTarget.textContent = e.currentTarget.value + " people";
   }
+  performValueFromNew(e) {
+    this.valueDisplayFromNewTarget.textContent = e.currentTarget.value + " €";
+   }
 }
