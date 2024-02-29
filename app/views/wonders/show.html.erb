@@ -30,7 +30,7 @@
     <h1><%= @wonder.title %></h1>
     <div class="buttons-container d-flex justify-content-end">
       <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
-      <p class="button">Save</p>
+      <p class="button" data-controller="save-wonder" data-action="click->save-wonder#save" data-save-wonder-wonder-id="<%= @wonder.id %>">Save</p>
     </div>
   </div>
   <%= render "shared/share" %>
@@ -90,13 +90,24 @@
               </div>
 
             <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
-              <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" } }, label: false, placeholder: 'For when?' %>
-
-
-              <%=  f.input :nb_participants, as: :range, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10, value: 1, data: { action: "input->range#performValue"} } %>
-              <span data-range-target="valueDisplay"> 1 people </span>
-              <div class="d-grid">
-                <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3" %>
+              <%= f.input :book_date,
+                as: :string,
+                label: 'Number of participant',
+                input_html: {
+                  data: { datepicker_target: "book_date" },
+                  label: false,
+                  placeholder: 'Date'
+                } %>
+              <%= f.input :nb_participants,
+                as: :integer,
+                label: 'Number of participant',
+                input_html: {
+                  id: 'nb_participants_field',
+                  min: 1,
+                  max: 10
+                } %>
+              <div class="d-grid" data-controller="wonders_controller">
+                <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3", data: { action: "click->wonders-controller#toReservations" } %>
               </div>
             <% end %>
             <hr>
