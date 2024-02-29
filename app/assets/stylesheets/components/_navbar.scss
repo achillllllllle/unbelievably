@@ -28,3 +28,11 @@
   font-weight: bold;
   margin: 0;
 }
+.navbar-nav .btn {
+  color: white !important;
+}
+
+.navbar-nav .btn.btn-light {
+  border-color: #8b58bf !important;
+  color: #8b58bf !important;
+}
