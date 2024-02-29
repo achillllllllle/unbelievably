@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def show
     @my_wonder = Wonder.new
     @my_wonders = @user.wonders
-    @my_reservations = @user.reservations
+    @my_reservations = @user.reservations.order(created_at: :desc)
   end
 
   private

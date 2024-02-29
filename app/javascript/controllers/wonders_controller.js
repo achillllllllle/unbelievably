@@ -16,4 +16,8 @@ export default class extends Controller {
         myModal.show()
       })
   }
+
+  toReservations() {
+    window.location.href = "/user#reservations";
+  }
 }
