@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :wonders do
     resources :reservations, only: %i[create]
   end
-  resources :users, only: %i[show edit update]
+  resources :users, only: %i[show]
   resources :reservations, only: %i[edit update destroy]
 end
