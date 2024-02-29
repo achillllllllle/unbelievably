@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    if current_user == @reservation.wonder.user #si c'est le proprio
+    if current_user == @reservation.wonder.user
       @reservation.update(accepted: true)
       redirect_to user_path(current_user)
     else
