@@ -10,6 +10,9 @@
     <li>
       <a href="#reservations" class="tab-underlined" data-action="click->tabs#toggle">My reservations</a>
     </li>
+    <li>
+      <a href="#saved" class="tab-underlined" data-action="click->tabs#toggle">Saved</a>
+    </li>
   </ul>
 
   <div id="wonders" class="tab-content">
@@ -94,7 +97,7 @@
         <table class="table table-borderless">
           <thead>
             <tr>
-              <th class="font-weight-bold text-secondary">my reservation</th>
+              <th class="font-weight-bold text-secondary">reservation</th>
               <th class="font-weight-bold text-secondary text-center">date</th>
               <th class="font-weight-bold text-secondary text-center">people</th>
               <th class="font-weight-bold text-secondary text-center">status</th>
@@ -130,9 +133,8 @@
                 <td class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
                     <!--Add the link_to-->
-                      <i class="fas fa-pencil-alt"></i> Edit
-                    <!--Add the link_to-->
-                      <i class="far fa-trash-alt"></i> Delete
+                    <%= link_to "Edit <i class='fas fa-pencil-alt'></i>".html_safe, edit_reservation_path(reservation) %>
+                    <%= link_to "Delete <i class='far fa-trash-alt'></i>".html_safe, reservation_path(reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete your reservation ?" } %>
                   </div>
                 </td>
               </tr>
@@ -145,6 +147,57 @@
           </tbody>
         </table>
       </div>
+    <% end %>
+  </div>
+
+  <div id="saved" class="tab-content" data-tabs-target="tabContent" style="display: none;">
+    <% if @my_reservations.any? %>
+      <div class="reservations-list my-5">
+
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th class="font-weight-bold text-secondary">saved wonder</th>
+              <th class="font-weight-bold text-secondary text-center">price</th>
+              <th class="font-weight-bold text-secondary text-center">category</th>
+              <th class="font-weight-bold text-secondary text-center"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @my_wonders.each do |my_wonder| %>
+              <tr>
+                <td style="vertical-align: middle;">
+                  <% if my_wonder.photos.attached? %>
+                    <%= cl_image_tag my_wonder.photos.first.key, height: 100, width: 100, crop: :fill, class: "notification-photo", style: "float: left; margin-right: 20px;" %>
+                  <% else %>
+                    <%= image_tag("thumbnail.jpeg", class: "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
+                  <% end %>
+                  <%= link_to my_wonder.title, wonder_path(my_wonder.id), class: 'text-decoration-none' %>
+                  <p class="text-secondary mb-0"><small><%= my_wonder.category %></small></p>
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  <%= my_wonder.price_per_participant %> €
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  <%= my_wonder.category %>
+                </td>
+                <td class="text-center" style="vertical-align: middle;">
+                  <div class="notification-actions">
+                    <%= link_to wonder_path(@wonder_id), class: 'text-decoration-none action-link' do %>
+                      <i class="fa-regular fa-eye"></i> Show
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
     <% end %>
   </div>
 
