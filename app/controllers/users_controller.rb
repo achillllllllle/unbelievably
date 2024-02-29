@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   def show
     @my_wonders = @user.wonders
     @my_reservations = @user.reservations.order(created_at: :desc)
+
+    @user = User.find(params[:id])
+    @favorites = @user.favorites.includes(:wonder)
+
   end
 
   private

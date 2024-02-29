@@ -30,8 +30,9 @@
     <h1><%= @wonder.title %></h1>
     <div class="buttons-container d-flex justify-content-end">
       <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
-      <p class="button" data-controller="save-wonder" data-action="click->save-wonder#save" data-save-wonder-wonder-id="<%= @wonder.id %>">Save</p>
+      <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %></p>
     </div>
+    <%=  %>
   </div>
   <%= render "shared/share" %>
 

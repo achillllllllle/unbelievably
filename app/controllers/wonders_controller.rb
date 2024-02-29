@@ -43,6 +43,11 @@ class WondersController < ApplicationController
     redirect_to user_path(owner)
   end
 
+  def save_favorite
+    @wonder = Wonder.find(params[:id])
+    current_user.favorites << @wonder
+  end
+
   private
 
   def set_wonder
