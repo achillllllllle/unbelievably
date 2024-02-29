@@ -1,35 +1,59 @@
-<% my_reservations.each do |my_pending| %>
+<% my_reservations.each do |reservation| %>
   <div class="notification bg-light rounded">
-    <div class="row">
+    <div class="row w-100 d-flex align-items-center">
       <div class="col-md-2">
-        <p><%= my_pending.user.username %></p>
-      </div>
-      <div class="col-md-2">
-        <p>X people</p>
-      </div>
-      <div class="col-md-4">
-        <p>At <%= my_pending.book_date.strftime("%d/%m/%Y") %></p>
-      </div>
-      <div class="col-md-2">
-        <p><%= my_pending.price %> €</p>
-      </div>
-      <div class="col-md-2">
-        <div class="notification-actions">
-          <%= link_to "Accept <i class='fa-solid fa-check ms-2'></i>".html_safe,
-                      reservation_path(my_pending),
-                      class: "align-items-center d-flex",
-                      data: {
-                        turbo_method: 'patch',
-                        turbo_confirm: "You really want to accept this offer ?"
-                      } %>
-          <%= link_to "Refuse <i class='fa-solid fa-xmark ms-2'></i>".html_safe,
-                      reservation_path(my_pending),
-                      class: "align-items-center d-flex",
-                      data: {
-                        turbo_method: 'delete',
-                        turbo_confirm: "You really want to delete this offer ?"
-                      } %>
+        <div class="d-flex align-item-strech">
+          <%= cl_image_tag(reservation.user.avatar.key, class: "avatar me-2") %>
+          <p><%= reservation.user.username %></p>
         </div>
+      </div>
+      <div class="col-md-2">
+        <p class="fs-6">Quantity</p>
+        <p class="fw-bold"> <%= reservation.nb_participants %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fs-6">Date</p>
+        <p class="fw-bold"><%= reservation.book_date.strftime("%d/%m/%Y") %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fs-6">Total</p>
+        <p class="fw-bold"><%= reservation.price %> €</p>
+      </div>
+      <div class="col-md-auto">
+      <% if reservation.accepted? %>
+        <div class="d-flex">
+        <p class="text-success">Accepted</p>
+        <div class="notification-actions">
+          <%= link_to "Cancel <i class='fa-solid fa-xmark ms-2'></i>".html_safe,
+              reservation_path(reservation),
+              class: "align-items-center d-flex badge text-bg-danger text-light",
+              data: {
+                turbo_method: 'delete',
+                turbo_confirm: "You really want to cancel this reservation ?"
+              } %>
+          </div>
+        </div>
+      <% else %>
+        <div class="d-flex">
+          <p class="text-warning">Pending</p>
+          <div class="notification-actions">
+            <%= link_to "Accept <i class='fa-solid fa-check ms-2'></i>".html_safe,
+                        reservation_path(reservation),
+                        class: "align-items-center d-flex badge text-bg-success text-light",
+                        data: {
+                          turbo_method: 'patch',
+                          turbo_confirm: "You really want to accept this reservation ?"
+                        } %>
+            <%= link_to "Refuse <i class='fa-solid fa-xmark ms-2'></i>".html_safe,
+                        reservation_path(reservation),
+                        class: "align-items-center d-flex badge text-bg-danger text-light",
+                        data: {
+                          turbo_method: 'delete',
+                          turbo_confirm: "You really want to refuse this reservation ?"
+                        } %>
+          </div>
+        </div>
+      <% end %>
       </div>
     </div>
   </div>

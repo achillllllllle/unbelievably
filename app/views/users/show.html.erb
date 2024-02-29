@@ -5,7 +5,7 @@
 
   <ul id="tabs" class="list-inline tabs-underlined">
     <li>
-      <a href="#wonders" class="tab-underlined active" data-action="click->tabs#toggle">My wonders</a>
+      <a href="#wonders" class="tab-underlined active" data-action="click->tabs#toggle">My listings</a>
     </li>
     <li>
       <a href="#reservations" class="tab-underlined" data-action="click->tabs#toggle">My reservations</a>
@@ -19,7 +19,7 @@
         <table class="table table-borderless">
           <thead>
             <tr>
-              <th class="font-weight-bold text-secondary">my wonder</th>
+              <th class="font-weight-bold text-secondary">Listing</th>
               <th class="font-weight-bold text-secondary text-center">price</th>
               <th class="font-weight-bold text-secondary text-center">category</th>
               <th class="font-weight-bold text-secondary text-center"></th>
@@ -45,11 +45,11 @@
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
-                    <%= link_to edit_wonder_path(my_wonder), class: 'text-decoration-none action-link' do %>
-                      <i class="fas fa-pencil-alt"></i> Edit
+                    <%= link_to edit_wonder_path(my_wonder), class: 'w-auto btn btn-secondary text-light d-block text-decoration-none action-link' do %>
+                      <i class="fas fa-pencil-alt"></i> Edit listing
                     <% end %>
-                    <%= link_to wonder_path(my_wonder), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this wonder !?"}, class: 'text-decoration-none action-link' do %>
-                      <i class="far fa-trash-alt"></i> Delete
+                    <%= link_to wonder_path(my_wonder), data: {turbo_method: 'delete', turbo_confirm: "You really want to delete this listing?"}, class: 'm-2 badge text-black d-block text-decoration-none action-link' do %>
+                      Delete listing
                     <% end %>
                   </div>
                 </td>
@@ -57,14 +57,22 @@
 
               <tr>
                 <td colspan="4">
+                  <% if my_wonder.reservations.count > 0 %>
                   <div data-controller="toggle">
                     <button data-action="click->toggle#offer" class="button pb-2 button-with-chevron" data-target="toggle.icon">
-                      <i class="fa-solid fa-chevron-down"></i> See offers
+                      <i class="fa-solid fa-chevron-down"></i> See All Reservations
                     </button>
+                    <% count = my_wonder.reservations.count { |reservation| !reservation.accepted? } %>
+                    <% if count > 0 %>
+                      <p class="text-warning"> <%= count %> pending</p>
+                    <% end %>
                     <div data-toggle-target="togglableElement" class="d-none">
                       <%= render "offer", my_reservations: my_wonder.reservations %>
                     </div>
                   </div>
+                  <% else %>
+                    <p class="button pb-2 button-with-chevron">No reservations, yet!</p>
+                  <% end %>
                 </td>
               </tr>
 
