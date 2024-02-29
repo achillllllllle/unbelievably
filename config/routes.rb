@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   root to: "wonders#index"
   # Declaration of routes
   devise_for :users
+
   resources :wonders do
     resources :reservations, only: %i[create]
+    resources :favorites, only: %i[create destroy]
   end
+
   resources :users, only: %i[show]
   resources :reservations, only: %i[edit update destroy]
 end
