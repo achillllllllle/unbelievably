@@ -94,7 +94,7 @@
 
             <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
               <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" } }, label: false, placeholder: 'For when?' %>
-              <%= f.input :nb_participants, as: :integer, label: 'And for how many?', input_html: { id: 'nb_participants' } %>
+              <%= f.input :nb_participants, as: :integer, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10 } %>
               <div class="d-grid">
                 <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3" %>
               </div>
@@ -104,7 +104,7 @@
             <div class="summary">
               <div class="d-flex justify-content-between">
                 <div class="w-100 fw-medium"><p>Total</p></div>
-                <div class="flex-shrink-1 fw-medium"><p id="totalPrice"><%= @wonder.price_per_participant %>€</p></div>
+                <div class="flex-shrink-1 fw-medium"><p id="totalPrice"><%= @wonder.price_per_participant.to_int %>€</p></div>
               </div>
             </div>
           </div>

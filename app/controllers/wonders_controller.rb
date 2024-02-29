@@ -4,8 +4,8 @@ class WondersController < ApplicationController
 
   def index
     if params["search"] && params["search"]["query"].present?
-      query = params["search"]["query"].capitalize
-      @wonders = Wonder.where("title LIKE ?", "%#{query}%")
+      query = params["search"]["query"]
+      @wonders = Wonder.where("title ILIKE ?", "%#{query}%")
     else
       @wonders = Wonder.all
     end
