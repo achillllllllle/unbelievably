@@ -17,3 +17,21 @@
   opacity: 1;
   border-bottom: 3px solid #555555;
 }
+
+.reservation-highlight {
+  animation: highlight 3s ease;
+  animation-fill-mode: forwards;
+  transition: background-color 0.5s;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #8b58bf;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
