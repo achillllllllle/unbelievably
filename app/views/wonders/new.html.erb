@@ -41,13 +41,16 @@
         <%= f.input :category, label: false, placeholder: 'Adventure, Mystery...', input_html: { class: 'form-control' }, wrapper: false %>
       </div>
 
-      <!-- Location Field -->
       <div class="form-group mb-3">
         <%= f.label :location, class: 'form-label' do %>
           <i class="fa fa-map-marker-alt"></i> Location
           <small>(Where is your wonder located?)</small>
         <% end %>
-        <%= f.input :location, label: false, placeholder: 'Enchanted Forest, Dreamy Castle...', input_html: { class: 'form-control' }, wrapper: false %>
+        <%= f.input :location,
+            input_html: {data: {location_autocomplete_target: "location"}, class: "d-none" },
+            label: false,
+            wrapper_html: {data: {controller: "location-autocomplete", location_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
+        %>
       </div>
 
       <!-- Details/Content Field -->

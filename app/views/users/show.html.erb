@@ -113,7 +113,7 @@
                   <% else %>
                     <%= image_tag("thumbnail.jpeg", class: "notification-photo", style: "width: 100px; float: left; margin-right: 20px;") %>
                   <% end %>
-                  <%= link_to "Request #{reservation.wonder.title}", reservation_path(reservation.wonder.title), class: 'text-decoration-none' %>
+                  <%= link_to "Request #{reservation.wonder.title}", wonder_path(reservation.wonder.id), class: 'text-decoration-none' %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <p class="text-secondary mb-0"><small><%= reservation.book_date %></small></p>
