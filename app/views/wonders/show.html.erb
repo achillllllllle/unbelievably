@@ -27,7 +27,29 @@
     <h1><%= @wonder.title %></h1>
     <div class="buttons-container d-flex justify-content-end">
       <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
-      <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %></p>
+      <%# <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %>
+      <p type="button" class="button"
+        data-controller="save-wonder"
+        data-action="click->save-wonder#saveWonder"
+        data-save-wonder-target="button"
+        data-text-original="Save"
+        data-text-toggled="Saved">
+        <%= link_to "Save", wonder_favorites_path(@wonder), data: { turbo_method: "post" } %>
+        <i class="fa-regular fa-bookmark" data-icon="down" data-save-wonder-target="icon"></i>
+        <i class="fa-solid fa-bookmark d-none" data-icon="up" data-save-wonder-target="icon"></i>
+        <span data-save-wonder-target="text" data-text-original="Save" data-text-toggled="Saved"></span>
+      </p>
+
+
+
+
+      <!--<p type="button" class="button" data-controller="save-wonder" data-action="click->save-wonder#saveWonder" data-target="save-wonder.text, save-wonder.icon">
+        <%= link_to "Save", wonder_favorites_path(@wonder), data: { turbo_method: "post" } %>
+        <i class="fa-regular fa-bookmark" data-icon="down"></i>
+        <i class="fa-solid fa-bookmark d-none" data-icon="up"></i>
+        <span data-text-original="Save" data-text-toggled="Saved">Save</span>
+      </p>-->
+
     </div>
     <%=  %>
   </div>
@@ -117,4 +139,3 @@
     </div>
   </div>
 </div>
-
