@@ -14,9 +14,10 @@ class WondersController < ApplicationController
   def show
     @reservation = Reservation.new
     @marker =
-      {
-        lat: @wonder.latitude,
-        lng: @wonder.longitude
+    {
+      lat: @wonder.latitude,
+      lng: @wonder.longitude
+
       }
   end
 
