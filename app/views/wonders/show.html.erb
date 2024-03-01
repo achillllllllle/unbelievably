@@ -26,9 +26,8 @@
   <div class="principal-infos d-flex align-items-center justify-content-between pt-2">
     <h1><%= @wonder.title %></h1>
     <div class="buttons-container d-flex justify-content-end">
-      <p type="button" class="btn" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
-      <%# <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %>
-      <div data-controller="save-wonder">
+      <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
+      <p type="button" class="button" data-controller="save-wonder">
         <%= link_to wonder_favorites_path(@wonder),
                     class: current_user.has_favorite?(@wonder) ? "d-none btn" : "btn",
                     data: {
@@ -47,7 +46,7 @@
                     } do %>
           <i class="fa-solid fa-bookmark"></i> Saved
         <% end %>
-      </div>
+      </p>
     </div>
     <%=  %>
   </div>
@@ -99,7 +98,7 @@
         <hr>
 
         <div class="d-grid">
-          <p class="button mt-3 col-3"><%= link_to "Back to all wonders", wonders_path %></p>
+          <p class="button mt-3 col-3"><i class="fa-solid fa-rotate-left"></i> <%= link_to "Back to all wonders", wonders_path %></p>
         </div>
       </div>
     </div>
