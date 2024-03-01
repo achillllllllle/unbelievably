@@ -133,18 +133,24 @@
                   <% end %>
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
-                    <% if reservation.accepted? %>
-                      <p class="text-success mb-0"><small>Accepted</small></p>
-                    <% elsif !reservation.accepted.nil? %>
-                      <p class="text-danger mb-0"><small>Refused</small></p>
-                    <% else %>
-                      <p class="text-warning mb-0"><small>Pending</small></p>
+                    <% case reservation.status %>
+                      <% when 'accepted' %>
+                        <p class="text-success mb-0"><small>Accepted</small></p>
+                      <% when 'refused' %>
+                        <p class="text-danger mb-0"><small>Refused</small></p>
+                      <% else %>
+                        <p class="text-warning mb-0"><small>Pending</small></p>
                     <% end %>
                 </td>
-                <td class="text-center" style="vertical-align: middle;">
+
+                <td colspan="4" class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
-                    <%= link_to "Edit <i class='fas fa-pencil-alt'></i>".html_safe, edit_reservation_path(reservation) %>
-                    <%= link_to "Cancel <i class='far fa-trash-alt'></i>".html_safe, reservation_path(reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to cancel your reservation ?" } %>
+                    <%= link_to edit_reservation_path(reservation), class: 'w-auto btn btn-secondary text-light d-block text-decoration-none action-link' do %>
+                      <i class="fas fa-pencil-alt"></i> Edit reservation
+                    <% end %>
+                    <%= link_to reservation_path(reservation), data: {turbo_method: 'delete', turbo_confirm: "You really want to cancel your reservation?"}, class: 'm-2 badge text-black d-block text-decoration-none action-link' do %>
+                      Cancel
+                    <% end %>
                   </div>
                 </td>
               </tr>
@@ -152,7 +158,6 @@
               <tr>
                 <td colspan="4" style="border-top: 1px solid #e0e0e0;"></td>
               </tr>
-
             <% end %>
           </tbody>
         </table>
@@ -193,8 +198,9 @@
                 </td>
                 <td class="text-center" style="vertical-align: middle;">
                   <div class="notification-actions">
-                    <%= link_to "Unsaved <i class='far fa-trash-alt'></i>".html_safe, wonder_favorite_path(wonder, favorite), method: :delete, data: {turbo_method: 'delete', turbo_confirm: "Unsave this wonder?" } %>
-
+                    <%= link_to wonder_favorite_path(wonder, favorite), method: :delete, data: {turbo_method: 'delete', turbo_confirm: "Unsave this wonder?" }, class: 'w-auto btn btn-secondary text-light d-block text-decoration-none action-link' do %>
+                      <i class="fa-solid fa-bookmark"></i> Unsaved wonder
+                    <% end %>
                   </div>
                 </td>
               </tr>
