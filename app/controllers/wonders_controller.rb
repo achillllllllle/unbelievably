@@ -5,7 +5,10 @@ class WondersController < ApplicationController
   def index
     if params["search"] && params["search"]["query"].present?
       query = params["search"]["query"]
-      @wonders = Wonder.where("title ILIKE ? AND user_id != ?", "%#{query}%", current_user.id)
+      @wonders = Wonder.where("title ILIKE ?", "%#{query}%")
+      if current_user
+        @wonders = @wonders.select { |wonder| wonder.user != current_user}
+      end
     else
       @wonders = Wonder.where.not(user: current_user)
     end
