@@ -1,55 +1,39 @@
 <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
 
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 text-center" id="charreModalLabel">✨ Share this wonder ✨</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content rounded-4">
+      <div class="mt-2">
+        <h1 class="modal-title fs-5 text-center" id="charreModalLabel">✨ Share your next experience </h1>
+        <hr>
       </div>
 
       <div class="modal-body">
         <div class="share-card">
-          <div class="share-link my-2">
+          <div class="share-link my-2" data-controller="copyboard">
             <div style="display: flex; align-items: center;">
-              <i class="fa-solid fa-link details-icon"></i>
-              <p class="button m-0"><a href="navigator.clipboard.writeText('<%= @wonder_url %>')">Copy Link</a></p>
+            <img height="25px" src="https://res.cloudinary.com/drrbvxo6s/image/upload/v1709291884/copy_link_ecyuuq.png">
+              <p class="button m-0 ms-2"data-action="click->copyboard#clipboard"
+              data-copyboard-name-param="pouet"
+              ><a href="">Copy Link</a></p>
             </div>
           </div>
 
           <div class="share-link my-2">
             <div style="display: flex; align-items: center;">
-              <i class="fa-regular fa-envelope details-icon"></i>
-              <p class="button m-0"><a href="mailto:?subject=Check out this wonder&body=I thought you might like this wonder: <%= @wonder_url %>">Email</a></p>
+            <img height="25px" src="https://res.cloudinary.com/drrbvxo6s/image/upload/v1709291628/Mail_mo93jb.png">
+              <p class="button m-0 ms-2"><a href="mailto:<%=@wonder.user.email%>?subject=Check out this wonder&body=I thought you might like this wonder: <%= @wonder.user.username %>">Email</a></p>
             </div>
           </div>
 
           <div class="share-link my-2">
             <div style="display: flex; align-items: center;">
-              <i class="fa-brands fa-whatsapp details-icon"></i>
-              <p class="button m-0"><a href="whatsapp://send?text=Check out this wonder: <%= @wonder_url %>">WhatsApp</a></p>
-            </div>
-          </div>
-
-          <div class="share-link my-2">
-            <div style="display: flex; align-items: center;">
-              <i class="fa-brands fa-facebook-messenger details-icon"></i>
-              <p class="button m-0"><a href="fb-messenger://share/?link=<%= @wonder_url %>">Messenger</a></p>
-            </div>
-          </div>
-
-          <div class="share-link my-2">
-            <div style="display: flex; align-items: center;">
-              <i class="fa-brands fa-instagram details-icon"></i>
-              <p class="button m-0"><a href="https://www.instagram.com/create/post/?url=<%= @wonder_url %>">Instagram</a></p>
+              <img height="25px" src="https://res.cloudinary.com/drrbvxo6s/image/upload/v1709290079/Instagram_logo_2016.svg_my48np.webp" >
+              <p class="button m-0 ms-2"><a target="_blank" href="https://www.instagram.com/create/post/?url=<%= @wonder.user.username %>">Instagram</a></p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
   </div>
 </div>
