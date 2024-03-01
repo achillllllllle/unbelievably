@@ -28,7 +28,6 @@
     <div class="buttons-container d-flex justify-content-end">
       <p type="button" class="btn" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
       <%# <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %>
-
       <div data-controller="save-wonder">
         <%= link_to wonder_favorites_path(@wonder),
                     class: current_user.has_favorite?(@wonder) ? "d-none btn" : "btn",
@@ -49,27 +48,6 @@
           <i class="fa-solid fa-bookmark"></i> Saved
         <% end %>
       </div>
-
-      <%# <p type="button" class="button"
-        data-controller="save-wonder"
-        data-action="click->save-wonder#saveWonder"
-        data-save-wonder-target="button"
-        data-text-original="Save"
-        data-text-toggled="Saved">
-        <i class="fa-regular fa-bookmark" data-icon="down" data-save-wonder-target="icon"></i>
-        <span data-save-wonder-target="text" data-text-original="Save" data-text-toggled="Saved"></span>
-      </p> %>
-
-
-
-
-      <!--<p type="button" class="button" data-controller="save-wonder" data-action="click->save-wonder#saveWonder" data-target="save-wonder.text, save-wonder.icon">
-        <%= link_to "Save", wonder_favorites_path(@wonder), data: { turbo_method: "post" } %>
-        <i class="fa-regular fa-bookmark" data-icon="down"></i>
-        <i class="fa-solid fa-bookmark d-none" data-icon="up"></i>
-        <span data-text-original="Save" data-text-toggled="Saved">Save</span>
-      </p>-->
-
     </div>
     <%=  %>
   </div>
@@ -126,36 +104,54 @@
       </div>
     </div>
 
-    <div class="col-md-4 col-sm-12">
-      <div class="booking-container p-4">
-        <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
-          <div data-controller="range" class="card-body">
-            <div class="price d-flex align-items-center pb-3">
-              <i class="fa-solid fa-tag details-icon"></i>
-              <h5 class="mb-0"><strong><%= @wonder.price_per_participant.to_i %> €</strong> per participant</h5>
-              </div>
+    <% if @wonder.user != current_user %>
+      <div class="col-md-4 col-sm-12">
+        <div class="booking-container p-4">
+          <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div data-controller="range" class="card-body">
+              <div class="price d-flex align-items-center pb-3">
+                <i class="fa-solid fa-tag details-icon"></i>
+                <h5 class="mb-0"><strong><%= @wonder.price_per_participant.to_i %> €</strong> per participant</h5>
+                </div>
 
-            <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
-              <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" } }, label: false, placeholder: 'For when?' %>
+              <%= simple_form_for [@wonder, @reservation], data: {controller: "datepicker"} do |f| %>
+                <%= f.input :book_date, as: :string, input_html: { data: { datepicker_target: "book_date" }, class: "d-none" }, label: false, placeholder: 'For when?' %>
 
 
-              <%=  f.input :nb_participants, as: :range, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10, value: 1, data: { action: "input->range#performValueFromShow"} } %>
-              <span data-range-target="valueDisplayFromShow"> 1 people </span>
-              <div class="d-grid">
-                <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary primary-gradient col-12 mt-3" %>
-              </div>
-            <% end %>
-            <hr>
+                <%=  f.input :nb_participants, as: :range, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10, value: 1, data: { action: "input->range#performValueFromShow"} } %>
+                <span data-range-target="valueDisplayFromShow"> 1 people </span>
+                <div class="d-grid">
+                  <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary primary-gradient col-12 mt-3" %>
+                </div>
+              <% end %>
+              <hr>
 
-            <div class="summary">
-              <div class="d-flex justify-content-between">
-                <div class="w-100 fw-medium"><p>Total</p></div>
-                <div class="flex-shrink-1 fw-medium"><p id="totalPrice" data-range-target="priceDisplayFromShow" data-price=<%=@wonder.price_per_participant.to_int %>><%= @wonder.price_per_participant.to_int %>€</p></div>
+              <div class="summary">
+                <div class="d-flex justify-content-between">
+                  <div class="w-100 fw-medium"><p>Total</p></div>
+                  <div class="flex-shrink-1 fw-medium"><p id="totalPrice" data-range-target="priceDisplayFromShow" data-price=<%=@wonder.price_per_participant.to_int %>><%= @wonder.price_per_participant.to_int %>€</p></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% elsif @reservations.count > 0 %>
+      <div class="col-md-4 col-sm-12">
+        <div class="booking-container p-4">
+          <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+            <%= render "reservations", reservations: @reservations %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="col-md-4 col-sm-12">
+        <div class="booking-container p-4">
+          <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+            <h5>You have no reservation yet!</h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

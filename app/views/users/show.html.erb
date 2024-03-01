@@ -71,7 +71,7 @@
                     <button data-action="click->toggle#offer" class="button pb-2 button-with-chevron" data-target="toggle.icon">
                       <i class="fa-solid fa-chevron-down"></i> See All Reservations
                     </button>
-                    <% count = my_wonder.reservations.count { |reservation| !reservation.accepted? } %>
+                    <% count = my_wonder.reservations.count { |reservation| !reservation.accepted } %>
                     <% if count > 0 %>
                       <p class="text-warning"> <%= count %> pending</p>
                     <% end %>
@@ -182,9 +182,9 @@
           <thead>
             <tr>
               <th class="font-weight-bold text-secondary">Saved wonder</th>
-              <th class="font-weight-bold text-secondary text-center">Price</th>
-              <th class="font-weight-bold text-secondary text-center">Category</th>
-              <th class="font-weight-bold text-secondary text-center"></th>
+              <th class="font-weight-bold text-secondary text-center">price</th>
+              <th class="font-weight-bold text-secondary text-center">category</th>
+              <th class="font-weight-bold text-secondary text-center">status</th>
             </tr>
           </thead>
           <tbody>

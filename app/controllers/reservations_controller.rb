@@ -5,9 +5,9 @@ class ReservationsController < ApplicationController
     @wonder = Wonder.find(params[:wonder_id])
     @reservation = Reservation.new(reservation_params)
 
-    @reservation.pending?
-    @reservation.accepted?
-    @reservation.refused?
+    # @reservation.pending?
+    # @reservation.accepted?
+    # @reservation.refused?
 
     @reservation.user = current_user
     @reservation.wonder = @wonder
@@ -22,13 +22,12 @@ class ReservationsController < ApplicationController
     end
   end
 
-
   def edit
   end
 
   def update
     if current_user == @reservation.wonder.user
-      @reservation.update(accepted: true)
+      @reservation.update({ accepted: true, status: 'accepted' })
       redirect_to user_path(current_user)
     else
       @price_per_participant = @reservation.wonder.price_per_participant
