@@ -16,12 +16,12 @@
               </div>
               <p><%= wonder.content %></p>
               <div class="d-flex align-items-center">
-                <i class="fa-solid fa-location-dot fa-xs me-2 text-secondary"></i>
-                <p><%= wonder.location %></p>
+                <i class="fa-solid fa-tag fa-xs me-2 text-secondary"></i>
+                <p ><%= wonder.category %></p>
               </div>
               <div class="d-flex align-items-center">
-                <i class="fa-solid fa-tag fa-xs me-2 text-secondary"></i>
-                <p><%= wonder.category %></p>
+                <i class="fa-solid fa-location-dot fa-xs me-2 text-secondary"></i>
+                <p class="fw-bold"><%= wonder.location %></p>
               </div>
             </div>
             <h2 class="card-wonder-pricing"><%= wonder.price_per_participant.to_i  %>€</h2>
