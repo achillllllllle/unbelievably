@@ -16,11 +16,12 @@ class ReservationsController < ApplicationController
     @price = @quantity * @price_per_participant
     @reservation.price = @price
     if @reservation.save
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user, target: "reservations", reservation_id: @reservation.id), notice: "Your reservation is made! #{@reservation.wonder.user.username} has been notified and will get back to you soon"
     else
       redirect_to wonder_path(@wonder), alert: "Can't create reservation, check informations and try again"
     end
   end
+
 
   def edit
   end

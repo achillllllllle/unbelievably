@@ -1,10 +1,32 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["tabContent", "tabLink"];
+  static targets = ["tabContent", "tabLink", "reservationsButton", "reservation"];
+  static values = {
+    tab: String,
+    reservationId: Number
+  };
 
   connect() {
-    this.showTab("wonders");
+    addEventListener("turbo:load", this.openReservationsAndScrollToReservation.bind(this))
+  }
+
+  disconnect() {
+    removeEventListener("turbo:load", this.openReservationsAndScrollToReservation.bind(this));
+  }
+
+  openReservationsAndScrollToReservation() {
+    if (this.hasReservationIdValue && this.reservationIdValue > 0) {
+      this.openReservations();
+      const targetReservation = this.reservationTargets.find(reservation => parseInt(reservation.dataset.reservationId, 10) === this.reservationIdValue);
+      targetReservation.classList.add('reservation-highlight');
+
+      const yOffset = -500;
+      const y = targetReservation.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({top: y, behavior: 'smooth'});
+      this.reservationIdValue = null; // WTFFFFFFFFFFF
+    }
   }
 
   toggle(event) {
@@ -18,26 +40,36 @@ export default class extends Controller {
     this.showTab(targetTabId);
 
     const previousActiveTab = this.element.querySelector(".tab-underlined.active");
-      if (previousActiveTab) {
-        previousActiveTab.classList.remove("active");
-      }
-      event.target.classList.add("active");
+    if (previousActiveTab) {
+      previousActiveTab.classList.remove("active");
+    }
+    event.target.classList.add("active");
 
     if (targetTabId === "wonders") {
-      document.getElementById("reservations").classList.add("d-none")
-      document.getElementById("saved").classList.add("d-none")
-      document.getElementById("wonders").classList.remove("d-none")
-
+      this.openWonders();
     } else if (targetTabId === "reservations") {
-      document.getElementById("reservations").classList.remove("d-none")
-      document.getElementById("saved").classList.add("d-none")
-      document.getElementById("wonders").classList.add("d-none")
-
+      this.openReservations();
     } else if (targetTabId === "saved") {
-      document.getElementById("reservations").classList.add("d-none")
-      document.getElementById("saved").classList.remove("d-none")
-      document.getElementById("wonders").classList.add("d-none")
+      this.openSaved();
     }
+  }
+
+  openWonders() {
+    document.getElementById("reservations").classList.add("d-none")
+    document.getElementById("saved").classList.add("d-none")
+    document.getElementById("wonders").classList.remove("d-none")
+  }
+
+  openReservations() {
+    document.getElementById("reservations").classList.remove("d-none")
+    document.getElementById("saved").classList.add("d-none")
+    document.getElementById("wonders").classList.add("d-none")
+  }
+
+  openSaved() {
+    document.getElementById("reservations").classList.add("d-none")
+    document.getElementById("saved").classList.remove("d-none")
+    document.getElementById("wonders").classList.add("d-none")
   }
 
   showTab(tabId) {
