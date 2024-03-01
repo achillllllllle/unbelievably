@@ -100,7 +100,7 @@
               <%=  f.input :nb_participants, as: :range, label: 'And for how many?', input_html: { id: 'nb_participants', min: 1, max: 10, value: 1, data: { action: "input->range#performValueFromShow"} } %>
               <span data-range-target="valueDisplayFromShow"> 1 people </span>
               <div class="d-grid">
-                <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary col-12 mt-3" %>
+                <%= f.button :submit, '✨ Book this wonder ✨', class: "btn btn-primary primary-gradient col-12 mt-3" %>
               </div>
             <% end %>
             <hr>
@@ -117,4 +117,3 @@
     </div>
   </div>
 </div>
-
