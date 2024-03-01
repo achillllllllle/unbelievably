@@ -7,10 +7,10 @@ Wonder.destroy_all
 puts "Creating users..."
 users_info = [
   { email: "test@test.com", password: "azerty", username: "TestUser", phone: "01 28 45 67 89", birth_date: "1971-10-31" },
-  { email: "wizard@magicworld.com", password: "spellbound", username: "WizardWally", phone: "01 23 45 67 89", birth_date: "1970-10-31", avatar: "app/assets/images/avatar.jpeg" },
+  { email: "wizard@magicworld.com", password: "spellbound", username: "WizardWally", phone: "01 23 45 67 89", birth_date: "1970-10-31", avatar: "app/assets/images/avatar_wizard.jpeg" },
   { email: "fairy@enchantedforest.com", password: "pixiedust", username: "FairyFiona", phone: "+33 2 34 56 78 90", birth_date: "1985-05-04", avatar: "app/assets/images/avatar_fairy.webp" },
   { email: "sorcerer@apprentice.com", password: "magicwand", username: "SorcererSam", phone: "0033 3 45 67 89 01", birth_date: "1990-12-24", avatar: "app/assets/images/avatar_sorcer.webp" },
-  { email: "time.traveler@chronos.com", password: "paradox", username: "TimTheTimeTraveler", phone: "04 56 78 90 12", birth_date: "1920-01-01", avatar: "app/assets/images/avatar.jpeg" },
+  { email: "time.traveler@chronos.com", password: "paradox", username: "TimTheTimeTraveler", phone: "04 56 78 90 12", birth_date: "1920-01-01", avatar: "app/assets/images/avatar_time.jpeg" },
   { email: "pirate@sevenseas.com", password: "treasure", username: "PegLegPete", phone: "05 67 89 01 23", birth_date: "1680-09-19", avatar: "app/assets/images/avatar_pirate.webp" },
   # Ajout de nouveaux utilisateurs pour atteindre un total de 25
   { email: "explorer@adventures.com", password: "exploreMore", username: "ExplorerElla", phone: "01 47 85 67 41", birth_date: "1989-06-21" },
@@ -57,6 +57,7 @@ wizard_wally = users.find { |u| u.username == "WizardWally" }
 fairy_fiona = users.find { |u| u.username == "FairyFiona" }
 sorcerer_sam = users.find { |u| u.username == "SorcererSam" }
 pegleg_pete = users.find { |u| u.username == "PegLegPete" }
+time_traveler = users.find { |u| u.username == "TimTheTimeTraveler" }
 wonders_info = [
   {
   title: "Mermaid Pool Party",
@@ -100,7 +101,7 @@ wonders_info = [
   category: "Adventure",
   location: "Nepal",
   content: "Learn to sculpt clouds into fantastic shapes with the help of a high-flying wizard. Skydiving equipment included.",
-  user: wizard_wally,
+  user: time_traveler,
   long_description: "Ascend to the heavens with our Cloud Sculpting Class, a unique adventure that elevates the artistry of the skies to realms only dreamed of. Nestled among the towering peaks of Nepal, where the earth kisses the sky, this ethereal workshop begins at the break of dawn, as the first light bathes the world in a golden glow, and continues until dusk, when the clouds blush with the setting sun. Here, under the tutelage of a master wizard whose lineage traces back to the ancients who first whispered to the winds, you will learn the secrets of cloud manipulation, shaping the very fabric of the sky with tools enchanted for the purpose.
 
   Each participant is granted a set of cloud chisels, tools not of this earth but forged in the elemental forges of air and water, designed to carve vapors into shapes as intricate as your imagination allows. Safety, a paramount concern when working at such altitudes, is ensured with goggles enchanted to provide clarity amidst the mist and gloves that ward off the chill of the high winds. However, adventurers be warned: the art of cloud sculpting requires not just creativity but a readiness to adapt, as the medium is ever-shifting, as fleeting as the wind itself.
@@ -176,7 +177,7 @@ wonders_info = [
   category: "Adventure",
   location: "Egypt",
   content: "Travel back in time to witness the construction of the pyramids. Historical accuracy not guaranteed.",
-  user: wizard_wally,
+  user: time_traveler,
   long_description: "Embark on a voyage beyond the bounds of time with our Time Travel Excursion, where history is not just observed but experienced. This unparalleled journey begins at the stroke of midnight, under the cloak of a new moon, where the fabric of time is thinnest. Our destination: ancient Egypt, to witness the marvels of the pyramids' construction, an event shrouded in mystery and awe. As you step through the portal, you'll be adorned in period attire, blending seamlessly with the denizens of the past, your presence a whisper in the annals of history.
 
   Equipped with a time-traveler's toolkit—sun hats, sandals woven from the reeds of the Nile, and a phrasebook translating modern expressions into ancient dialects—you're prepared for a day where every moment is a page from history. Our guides, scholars of the arcane and masters of the temporal arts, ensure your passage through time is both safe and enlightening. They'll share tales of pharaohs and gods, of stars aligning to herald great events, and the magic that binds the stones.
