@@ -116,7 +116,7 @@
           </div>
         </div>
       </div>
-    <% else %>
+    <% elsif @reservations.count > 0 %>
       <div class="col-md-4 col-sm-12">
         <div class="booking-container p-4">
           <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
@@ -124,7 +124,14 @@
           </div>
         </div>
       </div>
-
+    <% else %>
+      <div class="col-md-4 col-sm-12">
+        <div class="booking-container p-4">
+          <div class="card p-3 shadow p-3 mb-5 bg-body-tertiary rounded">
+            <h5>You have no reservation yet!</h5>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
