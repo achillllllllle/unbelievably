@@ -91,13 +91,14 @@
         </table>
       </div>
     <% else %>
+      <p class="my-5">No wonders yet!</p>
     <% end %>
   </div>
 
   <div id="reservations"
-        class="tab-content <%= 'd-none' unless params[:target] == 'reservations' %>"
-        data-tabs-target="tabContent"
-        style="display: <%= params[:target] == 'reservations' ? 'block' : 'none' %>;">
+      class="tab-content <%= 'd-none' unless params[:target] == 'reservations' %>"
+      data-tabs-target="tabContent"
+      style="display: <%= params[:target] == 'reservations' ? 'block' : 'none' %>;">
     <% if @my_reservations.any? %>
       <div class="reservations-list my-5">
 
@@ -163,10 +164,15 @@
           </tbody>
         </table>
       </div>
+    <% else %>
+      <p class="my-5">No reservations yet!</p>
     <% end %>
   </div>
 
-  <div id="saved" class="tab-content" data-tabs-target="tabContent">
+  <div id="saved"
+      class="tab-content <%= 'd-none' unless params[:target] == 'reservations' %>"
+      data-tabs-target="tabContent"
+      style="display: <%= params[:target] == 'reservations' ? 'block' : 'none' %>;">
     <% if @favorites.any? %>
       <div class="saved-list my-5">
         <table class="table table-borderless">
