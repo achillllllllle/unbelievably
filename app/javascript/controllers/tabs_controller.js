@@ -19,12 +19,13 @@ export default class extends Controller {
     if (this.hasReservationIdValue && this.reservationIdValue > 0) {
       this.openReservations();
       const targetReservation = this.reservationTargets.find(reservation => parseInt(reservation.dataset.reservationId, 10) === this.reservationIdValue);
-      targetReservation.classList.add('reservation-highlight');
 
       const yOffset = -500;
       const y = targetReservation.getBoundingClientRect().top + window.scrollY + yOffset;
 
+      // console.log('scrolling to', y, targetReservation.getBoundingClientRect().top, window.scrollY, yOffset, targetReservation);
       window.scrollTo({top: y, behavior: 'smooth'});
+      targetReservation.classList.add('reservation-highlight');
       this.reservationIdValue = null; // WTFFFFFFFFFFF
     }
   }

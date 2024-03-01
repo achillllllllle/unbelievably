@@ -18,8 +18,16 @@
   border-bottom: 3px solid #555555;
 }
 
+.reservations-list {
+  tbody {
+    td {
+      background-color: transparent;
+    }
+  }
+}
+
 .reservation-highlight {
-  animation: highlight 3s ease;
+  animation: highlight 2s ease;
   animation-fill-mode: forwards;
   transition: background-color 0.5s;
 }
@@ -29,7 +37,7 @@
     background-color: transparent;
   }
   50% {
-    background-color: #8b58bf;
+    background-color: #FFF4DE;
   }
   100% {
     background-color: transparent;

@@ -114,7 +114,7 @@
           </thead>
           <tbody>
             <% @my_reservations.order(created_at: :desc).each do |reservation| %>
-              <tr data-tabs-target="reservation" data-reservation-id="<%= reservation.id %>">
+              <tr data-tabs-target="reservation" data-reservation-id="<%= reservation.id %>" class="rounded">
                 <td style="vertical-align: middle;">
                   <% if reservation.wonder.photos.attached? %>
                     <%= cl_image_tag reservation.wonder.photos.first.key, height: 100, width: 100, crop: :fill, class: "notification-photo", style: "float: left; margin-right: 20px;" %>
