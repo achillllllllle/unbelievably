@@ -90,6 +90,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_160921) do
     t.bigint "user_id"
     t.text "content"
     t.text "long_description"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_wonders_on_user_id"
   end
 
