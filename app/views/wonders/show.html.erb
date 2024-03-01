@@ -26,12 +26,12 @@
   <div class="principal-infos d-flex align-items-center justify-content-between pt-2">
     <h1><%= @wonder.title %></h1>
     <div class="buttons-container d-flex justify-content-end">
-      <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
+      <p type="button" class="btn" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
       <%# <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %>
 
       <div data-controller="save-wonder">
         <%= link_to wonder_favorites_path(@wonder),
-                    class: current_user.has_favorite?(@wonder) ? "d-none" : "",
+                    class: current_user.has_favorite?(@wonder) ? "d-none btn" : "btn",
                     data: {
                       save_wonder_target: "createBtn",
                       turbo_method: "post",
@@ -40,7 +40,7 @@
           <i class="fa-regular fa-bookmark"></i> Save
         <% end %>
         <%= link_to wonder_favorites_path(@wonder),
-                    class: current_user.has_favorite?(@wonder) ? "" : "d-none",
+                    class: current_user.has_favorite?(@wonder) ? "btn" : "d-none btn",
                     data: {
                       save_wonder_target: "destroyBtn",
                       turbo_method: "delete",
