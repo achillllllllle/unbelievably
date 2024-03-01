@@ -1,24 +1,62 @@
 puts "Clearing existing data..."
 Reservation.destroy_all
+Favorite.destroy_all
 User.destroy_all
 Wonder.destroy_all
 
 puts "Creating users..."
 users_info = [
   { email: "test@test.com", password: "azerty", username: "TestUser", phone: "01 28 45 67 89", birth_date: "1971-10-31" },
-  { email: "wizard@magicworld.com", password: "spellbound", username: "WizardWally", phone: "01 23 45 67 89", birth_date: "1970-10-31" },
-  { email: "fairy@enchantedforest.com", password: "pixiedust", username: "FairyFiona", phone: "+33 2 34 56 78 90", birth_date: "1985-05-04" },
-  { email: "sorcerer@apprentice.com", password: "magicwand", username: "SorcererSam", phone: "0033 3 45 67 89 01", birth_date: "1990-12-24" },
-  { email: "time.traveler@chronos.com", password: "paradox", username: "TimTheTimeTraveler", phone: "04 56 78 90 12", birth_date: "1920-01-01" },
-  { email: "pirate@sevenseas.com", password: "treasure", username: "PegLegPete", phone: "05 67 89 01 23", birth_date: "1680-09-19" },
+  { email: "wizard@magicworld.com", password: "spellbound", username: "WizardWally", phone: "01 23 45 67 89", birth_date: "1970-10-31", avatar: "app/assets/images/avatar.jpeg" },
+  { email: "fairy@enchantedforest.com", password: "pixiedust", username: "FairyFiona", phone: "+33 2 34 56 78 90", birth_date: "1985-05-04", avatar: "app/assets/images/avatar_fairy.webp" },
+  { email: "sorcerer@apprentice.com", password: "magicwand", username: "SorcererSam", phone: "0033 3 45 67 89 01", birth_date: "1990-12-24", avatar: "app/assets/images/avatar_sorcer.webp" },
+  { email: "time.traveler@chronos.com", password: "paradox", username: "TimTheTimeTraveler", phone: "04 56 78 90 12", birth_date: "1920-01-01", avatar: "app/assets/images/avatar.jpeg" },
+  { email: "pirate@sevenseas.com", password: "treasure", username: "PegLegPete", phone: "05 67 89 01 23", birth_date: "1680-09-19", avatar: "app/assets/images/avatar_pirate.webp" },
+  # Ajout de nouveaux utilisateurs pour atteindre un total de 25
+  { email: "explorer@adventures.com", password: "exploreMore", username: "ExplorerElla", phone: "01 47 85 67 41", birth_date: "1989-06-21" },
+  { email: "artist@canvas.com", password: "creativeSoul", username: "ArtistAria", phone: "01 49 75 85 60", birth_date: "1978-02-14" },
+  { email: "writer@stories.com", password: "wordsmith", username: "WriterWendy", phone: "01 58 39 20 41", birth_date: "1982-11-30" },
+  { email: "chef@gourmet.com", password: "culinaryGenius", username: "ChefCharlie", phone: "01 59 23 87 23", birth_date: "1975-08-16" },
+  { email: "dancer@rhythm.com", password: "danceLife", username: "DancerDanny", phone: "01 60 48 39 22", birth_date: "1990-05-25" },
+  { email: "singer@melody.com", password: "melodicVoice", username: "SingerSylvia", phone: "01 61 59 40 23", birth_date: "1986-09-11" },
+  { email: "gardener@flora.com", password: "greenThumb", username: "GardenerGina", phone: "01 62 70 51 24", birth_date: "1983-03-05" },
+  { email: "biker@roads.com", password: "openRoads", username: "BikerBob", phone: "01 63 81 62 25", birth_date: "1979-07-20" },
+  { email: "pilot@skies.com", password: "aboveClouds", username: "PilotPam", phone: "01 64 92 73 26", birth_date: "1988-12-12" },
+  { email: "scientist@research.com", password: "eureka", username: "ScientistSam", phone: "01 65 03 84 27", birth_date: "1976-04-18" },
+  { email: "athlete@sports.com", password: "goForGold", username: "AthleteAndy", phone: "01 66 14 95 28", birth_date: "1987-10-09" },
+  { email: "teacher@education.com", password: "teachLearn", username: "TeacherTina", phone: "01 67 25 06 29", birth_date: "1981-01-24" },
+  { email: "photographer@images.com", password: "captureMoments", username: "PhotographerPhil", phone: "01 68 36 17 30", birth_date: "1984-05-15" },
+  { email: "astronomer@stars.com", password: "starGazer", username: "AstronomerAlice", phone: "01 69 47 28 31", birth_date: "1977-09-02" },
+  { email: "magician@illusions.com", password: "abracadabra", username: "MagicianMilo", phone: "01 70 58 39 32", birth_date: "1991-03-22" },
+  { email: "architect@buildings.com", password: "designDreams", username: "ArchitectAnna", phone: "01 71 69 50 33", birth_date: "1974-08-30" },
+  { email: "vet@animalcare.com", password: "loveAnimals", username: "VetVicky", phone: "01 72 80 61 34", birth_date: "1985-02-17" },
+  { email: "firefighter@bravery.com", password: "fireFight", username: "FirefighterFelix", phone: "01 73 91 72 35", birth_date: "1980-06-06" },
+  { email: "detective@cases.com", password: "solveMysteries", username: "DetectiveDrew", phone: "01 74 02 83 36", birth_date: "1978-12-10" },
 ]
 
-users_info.each do |user_attrs|
-  User.create!(user_attrs)
+users = users_info.map do |user_attrs|
+  avatar_path = user_attrs.delete(:avatar)
+  user = User.create!(user_attrs)
+
+  if avatar_path && File.exist?(Rails.root.join(avatar_path))
+    user.avatar.attach(io: File.open(Rails.root.join(avatar_path)), filename: File.basename(avatar_path))
+  else
+    user.add_default_avatar
+  end
+
+  user
 end
 
-users = User.all
+puts "#{users.size} users created successfully!"
 puts "Creating wonders..."
+# Exemple d'ajout de merveilles en associant chaque utilisateur avec sa merveille
+# Note: Assurez-vous d'associer correctement les utilisateurs en fonction de leur username ou une autre logique spécifique
+
+users = User.all
+wizard_wally = users.find { |u| u.username == "WizardWally" }
+fairy_fiona = users.find { |u| u.username == "FairyFiona" }
+sorcerer_sam = users.find { |u| u.username == "SorcererSam" }
+pegleg_pete = users.find { |u| u.username == "PegLegPete" }
 wonders_info = [
   {
   title: "Mermaid Pool Party",
@@ -26,7 +64,7 @@ wonders_info = [
   category: "Creature",
   location: "Miami",
   content: "Host an unforgettable pool party with a real-life mermaid. Entertainment and magic guaranteed!",
-  user: users.sample,
+  user: fairy_fiona,
   long_description: "Plunge into the ultimate fantasy with our Mermaid Pool Party, an experience that transforms the crystal-clear waters of Miami into a shimmering stage where the line between myth and reality blurs. From the moment the sun kisses the horizon at 2 PM to when the moon bathes the pool in a silvery glow, guests are transported into a world where mermaids aren't just creatures of lore but enchanting hosts of an aquatic gala like no other. This extravaganza isn't merely about witnessing; it's about interacting with these mystical beings as they share tales of underwater kingdoms, perform aerials that defy the constraints of the water, and invite you to join in dances that ripple through the waves.
 
   Guest attire is an essential element of the immersion. We encourage all attendees to adorn themselves in garments that echo the essence of the sea—glimmering sequins, scales, and fabrics that flow like the ocean currents themselves. But be forewarned: mermaids are known for their playful spirits, often challenging guests to contests of aquatic agility or enticing them into treasure hunts that delve into the depths of the pool, where secrets and surprises await.
@@ -43,7 +81,7 @@ wonders_info = [
   category: "Spectacle",
   location: "New Orleans",
   content: "Spend a night in a haunted house, complete with ghostly apparitions and spine-tingling stories.",
-  user: users.sample,
+  user: sorcerer_sam,
   long_description: "Dare to step beyond the veil with our Haunted House Experience, a journey that beckons from the dimly lit streets of New Orleans, winding its way into the heart of darkness where shadows whisper, and the past never rests. As the clock strikes the witching hour, the boundary between the living and the spectral dissolves, inviting the bravest souls to venture through the creaking doors of an estate forsaken by time but inhabited by entities beyond our understanding.
 
   This is no mere walk through cobwebbed halls; it's an immersive expedition into the depths of the paranormal. Armed with state-of-the-art ghost-detecting gear and sage for protection—or provocation, for those who seek to pierce the veil even further—guests will navigate through rooms where history's echoes are not just heard but felt. Expect sudden chills as you pass through ethereal presences, whispers from unseen lips, and perhaps a spectral touch upon your shoulder in the darkness.
@@ -62,7 +100,7 @@ wonders_info = [
   category: "Adventure",
   location: "Nepal",
   content: "Learn to sculpt clouds into fantastic shapes with the help of a high-flying wizard. Skydiving equipment included.",
-  user: users.sample,
+  user: wizard_wally,
   long_description: "Ascend to the heavens with our Cloud Sculpting Class, a unique adventure that elevates the artistry of the skies to realms only dreamed of. Nestled among the towering peaks of Nepal, where the earth kisses the sky, this ethereal workshop begins at the break of dawn, as the first light bathes the world in a golden glow, and continues until dusk, when the clouds blush with the setting sun. Here, under the tutelage of a master wizard whose lineage traces back to the ancients who first whispered to the winds, you will learn the secrets of cloud manipulation, shaping the very fabric of the sky with tools enchanted for the purpose.
 
   Each participant is granted a set of cloud chisels, tools not of this earth but forged in the elemental forges of air and water, designed to carve vapors into shapes as intricate as your imagination allows. Safety, a paramount concern when working at such altitudes, is ensured with goggles enchanted to provide clarity amidst the mist and gloves that ward off the chill of the high winds. However, adventurers be warned: the art of cloud sculpting requires not just creativity but a readiness to adapt, as the medium is ever-shifting, as fleeting as the wind itself.
@@ -100,7 +138,7 @@ wonders_info = [
   category: "Magical Item",
   location: "Great Barrier Reef",
   content: "Weave the finest baskets on a scuba dive with mermaids. Waterproof baskets and scuba gear provided.",
-  user: users.sample,
+  user: fairy_fiona,
   long_description: "Submerge into the serene yet surreal world of Underwater Basket Weaving, a craft so unique it could only be taught by the mermaids of the Great Barrier Reef. As dawn's first light filters through the water, illuminating the vibrant corals and dancing schools of fish, participants gather at a secret cove, where the sea itself invites you to dive into an experience unlike any other. Under the guidance of mermaid artisans, whose lineage is as ancient as the ocean, you will learn to weave baskets with materials harvested from the seabed, infused with the magic of the deep.
 
   Equipped with enchanted scuba gear that allows for effortless communication under the waves, participants will find themselves part of an aquatic ballet, where each movement is a stroke of creation, and every breath draws inspiration from the ocean's depths. The mermaids, playful yet patient instructors, will introduce you to seaweeds that change color with your touch and corals that lend their strength to your creations. But be wary of the mischievous sea turtles, known to unravel baskets with a cheeky flick of their flippers as a reminder that in the ocean, play is part of the process.
@@ -138,7 +176,7 @@ wonders_info = [
   category: "Adventure",
   location: "Egypt",
   content: "Travel back in time to witness the construction of the pyramids. Historical accuracy not guaranteed.",
-  user: users.sample,
+  user: wizard_wally,
   long_description: "Embark on a voyage beyond the bounds of time with our Time Travel Excursion, where history is not just observed but experienced. This unparalleled journey begins at the stroke of midnight, under the cloak of a new moon, where the fabric of time is thinnest. Our destination: ancient Egypt, to witness the marvels of the pyramids' construction, an event shrouded in mystery and awe. As you step through the portal, you'll be adorned in period attire, blending seamlessly with the denizens of the past, your presence a whisper in the annals of history.
 
   Equipped with a time-traveler's toolkit—sun hats, sandals woven from the reeds of the Nile, and a phrasebook translating modern expressions into ancient dialects—you're prepared for a day where every moment is a page from history. Our guides, scholars of the arcane and masters of the temporal arts, ensure your passage through time is both safe and enlightening. They'll share tales of pharaohs and gods, of stars aligning to herald great events, and the magic that binds the stones.
@@ -157,7 +195,7 @@ wonders_info = [
   category: "Magical Item",
   location: "Hogwarts",
   content: "Play hide and seek in the Hogwarts castle, using genuine invisibility cloaks. Mischief managed!",
-  user: users.sample,
+  user: sorcerer_sam,
   long_description: "Venture into the realm of the unseen with our Invisibility Cloak Hide and Seek, an enchanting game set within the hallowed halls of Hogwarts. As twilight descends, casting long shadows across the castle, participants don the legendary invisibility cloaks, woven from the hair of Demiguise and enchanted with spells of concealment. The game, a timeless tradition among wizards and witches, transforms the familiar corridors and secret passages into a playground of mystery and mischief.
 
   The rules are simple, yet the play is anything but. Cloaked in invisibility, seekers and hiders move with silent footsteps, their presence betrayed only by the faintest whisper of fabric or the occasional giggle muffled by magic. The castle itself becomes an ally to some and a trickster to others, its shifting staircases and hidden rooms offering refuge or leading astray with equal whimsy.
@@ -176,7 +214,7 @@ wonders_info = [
   category: "Adventure",
   location: "Ireland",
   content: "Hunt for leprechaun gold at the end of the rainbow. Shovels and raincoats provided.",
-  user: users.sample,
+  user: wizard_wally,
   long_description: "Immerse yourself in the emerald isles' most enchanting folklore with our Leprechaun Gold Hunt, a whimsical adventure that beckons from the lush, mist-covered hills of Ireland. As dawn breaks, painting the sky in hues of gold and pink, hunters gather at the edge of a rainbow, where legend says the leprechauns hide their pots of gold. This isn't merely a hunt; it's a journey into the heart of Irish myth, a quest for fortune guided by riddles whispered on the wind and clues hidden in ancient runes.
 
   Equipped with gold-detecting rods and rainbow-resistant sunglasses, adventurers set forth into the wilderness, their spirits as bright as the morning. The leprechauns, elusive and cunning, have laid a trail of puzzles and traps, each more challenging than the last. Hunters must navigate through enchanted forests, across babbling brooks, and over rolling green hills, all while keeping an eye out for fairy circles and other supernatural pitfalls.
@@ -195,7 +233,7 @@ wonders_info = [
   category: "Adventure",
   location: "Caribbean",
   content: "Learn to sail a pirate ship with a crew of friendly ghosts. Eye patches and parrots included.",
-  user: users.sample,
+  user: pegleg_pete,
   long_description: "Set sail on the adventure of a lifetime with our Pirate Ship Sailing Class, where the Caribbean's crystal waters become your playground, and the horizon is not a limit but a destination. As the sun rises, casting its golden light upon the docks, aspiring pirates gather, their eyes alight with the thrill of the unknown. This is no ordinary sailing lesson; it's an initiation into a life of adventure, where the Jolly Roger flies high, and the sea calls to the heart of every explorer.
 
   Under the tutelage of a crew of friendly ghosts, remnants of a pirate era long gone but not forgotten, participants learn the art of navigation, the secrets of the trade winds, and the language of the sea. These spectral sailors, bound to the ship by tales of unfinished quests, share their knowledge with a generosity only the timeless possess. Each participant is equipped with a personalized pirate hat, an eye patch, and a temporary parrot companion, ensuring that they look the part as they take the helm, hoist the sails, and chart a course into legend.
@@ -214,7 +252,7 @@ wonders_info = [
   category: "Spectacle",
   location: "Transylvania",
   content: "Taste the finest wines in Dracula's castle. Garlic necklaces and wooden stakes provided for safety.",
-  user: users.sample,
+  user: wizard_wally,
   long_description: "Step into the shadows of Transylvania for a Vampire Wine Tasting experience that transcends the ordinary, merging the allure of ancient mystique with the refined pleasure of wine. As twilight descends upon the land, casting its purple hue over the Carpathian Mountains, guests are summoned to the imposing gates of Dracula's Castle. This evening is not just about savoring wine; it's an immersion into a world where history, horror, and hedonism intertwine.
 
   Upon entry, participants are adorned with garlic necklaces, a stylish yet protective accessory, and handed a wooden stake—just in case. The castle, a labyrinth of stone and shadow, opens its secrets to those daring enough to explore its depths. Each chamber reveals a different vintage, carefully selected from the castle's ancient cellars, where bottles lay dust-covered but preserved, their contents a testament to centuries of winemaking mastery.
@@ -277,7 +315,7 @@ wonders_info = [
   category: "Adventure",
   location: "Salem",
   content: "Learn to fly a broomstick with certified witch instructors. Helmets and knee pads included.",
-  user: users.sample,
+  user: sorcerer_sam,
   long_description: "Ascend into the realm of myth and magic with our Broomstick Flying Lessons, an exhilarating opportunity to take to the skies and master the ancient art of broomstick aviation. As the dawn casts its first light over Salem, the air tinged with the scent of adventure, enthusiasts of all ages gather on a field shrouded in mists and legend. Here, where the boundary between the mundane and magical blurs, participants are introduced to their brooms, each one a masterpiece of craftsmanship, combining traditional witching materials with modern aerodynamics for the perfect flight experience.
 
   The day begins with a grounding in the basics of broomstick lore, including the selection of the right broom for one's spirit, the proper care and feeding of a broomstick, and the essential spells for takeoff, navigation, and landing. Safety is paramount, with enchantments woven into helmets and knee pads to protect against falls, and GPS spells to ensure no one strays too far into the unknown.
@@ -310,45 +348,42 @@ wonders_info.each do |wonder_attrs|
 end
 puts "Wonders created successfully!"
 
-
 puts "Creating reservations..."
 
 def set_user_wonder
   user = User.all.sample
-  wonder = Wonder.all.sample
-  if user.id != wonder.user_id
-    [user, wonder]
-  else
+  wonders = Wonder.where.not(user_id: user.id)
+  wonder = wonders.sample
+
+  # Vérifie si wonder est nil et relance la méthode si nécessaire
+  if wonder.nil?
     set_user_wonder
+  else
+    [user, wonder]
   end
 end
 
-user_wonder = []
-16.times do
-  user_wonder.append(set_user_wonder)
+user_wonder_pairs = []
+25.times do |i| # Adaptez le nombre à votre besoin
+  user_wonder_pairs << set_user_wonder
 end
 
-reservations_info = [
-  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[0].first, wonder: user_wonder[0].last },
-  { book_date: "2024-06-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[1].first, wonder: user_wonder[1].last },
-  { book_date: "2025-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[2].first, wonder: user_wonder[2].last },
-  { book_date: "2024-03-23", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[3].first, wonder: user_wonder[3].last },
-  { book_date: "2024-05-15", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[4].first, wonder: user_wonder[4].last },
-  { book_date: "2025-09-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[5].first, wonder: user_wonder[5].last },
-  { book_date: "2024-03-01", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[6].first, wonder: user_wonder[6].last },
-  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[7].first, wonder: user_wonder[7].last },
-  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[8].first, wonder: user_wonder[8].last },
-  { book_date: "2024-09-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[9].first, wonder: user_wonder[9].last },
-  { book_date: "2029-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[10].first, wonder: user_wonder[10].last, },
-  { book_date: "2024-09-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[11].first, wonder: user_wonder[11].last, },
-  { book_date: "2024-12-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[12].first, wonder: user_wonder[12].last, },
-  { book_date: "2024-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[13].first, wonder: user_wonder[13].last, },
-  { book_date: "2029-03-10", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[14].first, wonder: user_wonder[14].last, },
-  { book_date: "2024-04-11", nb_participants: (1..10).to_a.sample, price: 500, user: user_wonder[15].first, wonder: user_wonder[15].last },
-]
+reservations_info = user_wonder_pairs.map.with_index do |(user, wonder), index|
+  nb_participants = rand(1..10)
+  book_date = (Date.today + index.days).to_s
+  price = nb_participants * wonder.price_per_participant
+
+  {
+    book_date: book_date,
+    nb_participants: nb_participants,
+    price: price,
+    user: user,
+    wonder: wonder
+  }
+end
 
 reservations_info.each do |reservation_attrs|
   Reservation.create!(reservation_attrs)
 end
 
-puts "Data seeded successfully!"
+puts "Reservations created successfully!"
