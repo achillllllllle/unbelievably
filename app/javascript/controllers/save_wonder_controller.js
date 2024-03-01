@@ -1,16 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="save-wonder"
 export default class extends Controller {
-  static targets = ["wonder"];
+  static targets = ["text", "icon", "button"];
 
-  save() {
-    const wonderId = this.wonderTarget.dataset.wonderId;
+  saveWonder(event) {
+    console.log(event);
 
-    fetch('/save_wonder', {
-      method: "POST",
-      headers: {},
-      body: {}}
-    )
+    const textTarget = this.textTarget;
+    const iconTarget = this.iconTarget;
+
+    if (textTarget.innerText === textTarget.dataset.textOriginal) {
+      textTarget.innerText = textTarget.dataset.textToggled;
+      iconTarget.classList.remove("d-none");
+    } else {
+      textTarget.innerText = textTarget.dataset.textOriginal;
+      iconTarget.classList.add("d-none");
+    }
   }
 }
