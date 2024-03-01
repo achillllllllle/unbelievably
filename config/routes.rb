@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
   resources :wonders do
     resources :reservations, only: %i[create]
-    resources :favorites, only: %i[create destroy]
+    resources :favorites, only: %i[create] do
+      collection do
+        delete :destroy
+      end
+    end
   end
 
   resources :users, only: %i[show]

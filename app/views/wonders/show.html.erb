@@ -28,17 +28,37 @@
     <div class="buttons-container d-flex justify-content-end">
       <p type="button" class="button" data-bs-toggle="modal" data-bs-target="#shareModal">Share</p>
       <%# <p type="button" class="button"><%= link_to "Save", wonder_favorites_path(@wonder), data: {turbo_method: "post" } %>
-      <p type="button" class="button"
+
+      <div data-controller="save-wonder">
+        <%= link_to wonder_favorites_path(@wonder),
+                    class: current_user.has_favorite?(@wonder) ? "d-none" : "",
+                    data: {
+                      save_wonder_target: "createBtn",
+                      turbo_method: "post",
+                      action: "click->save-wonder#create"
+                    } do %>
+          <i class="fa-regular fa-bookmark"></i> Save
+        <% end %>
+        <%= link_to wonder_favorites_path(@wonder),
+                    class: current_user.has_favorite?(@wonder) ? "" : "d-none",
+                    data: {
+                      save_wonder_target: "destroyBtn",
+                      turbo_method: "delete",
+                      action: "click->save-wonder#destroy"
+                    } do %>
+          <i class="fa-solid fa-bookmark"></i> Saved
+        <% end %>
+      </div>
+
+      <%# <p type="button" class="button"
         data-controller="save-wonder"
         data-action="click->save-wonder#saveWonder"
         data-save-wonder-target="button"
         data-text-original="Save"
         data-text-toggled="Saved">
-        <%= link_to "Save", wonder_favorites_path(@wonder), data: { turbo_method: "post" } %>
         <i class="fa-regular fa-bookmark" data-icon="down" data-save-wonder-target="icon"></i>
-        <i class="fa-solid fa-bookmark d-none" data-icon="up" data-save-wonder-target="icon"></i>
         <span data-save-wonder-target="text" data-text-original="Save" data-text-toggled="Saved"></span>
-      </p>
+      </p> %>
 
 
 
