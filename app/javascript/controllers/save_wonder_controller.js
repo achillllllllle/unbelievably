@@ -1,20 +1,49 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["text", "icon", "button"];
+  static targets = ["createBtn", "destroyBtn"];
 
-  saveWonder(event) {
-    console.log(event);
+  create(event) {
+    event.preventDefault()
 
-    const textTarget = this.textTarget;
-    const iconTarget = this.iconTarget;
-
-    if (textTarget.innerText === textTarget.dataset.textOriginal) {
-      textTarget.innerText = textTarget.dataset.textToggled;
-      iconTarget.classList.remove("d-none");
-    } else {
-      textTarget.innerText = textTarget.dataset.textOriginal;
-      iconTarget.classList.add("d-none");
+    const url = event.currentTarget.href
+    const options = {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "X-CSRF-Token": this.csrfToken()
+      }
     }
+
+    fetch(url, options)
+      .then(response => response.json())
+      .then((data) => {
+        this.createBtnTarget.classList.toggle('d-none', data.success)
+        this.destroyBtnTarget.classList.toggle('d-none', !data.success)
+      })
+  }
+
+  destroy(event) {
+    event.preventDefault()
+
+    const url = event.currentTarget.href
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "X-CSRF-Token": this.csrfToken()
+      }
+    }
+
+    fetch(url, options)
+      .then(response => response.json())
+      .then((data) => {
+        this.createBtnTarget.classList.toggle('d-none', !data.success)
+        this.destroyBtnTarget.classList.toggle('d-none', data.success)
+      })
+  }
+
+  csrfToken() {
+    return document.querySelector('[name="csrf-token"]').content
   }
 }

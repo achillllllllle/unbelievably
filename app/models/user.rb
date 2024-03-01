@@ -25,6 +25,9 @@ class User < ApplicationRecord
       avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar.jpeg')), filename: 'avatar.jpeg', content_type: 'image/jpeg')
     end
   end
-  private
+
+  def has_favorite?(wonder)
+    Favorite.find_by(user: self, wonder: wonder).present?
+  end
 
 end
