@@ -19,12 +19,12 @@ class User < ApplicationRecord
   # Ajoute un avatar par défaut si l'utilisateur n'en a pas
   before_create :add_default_avatar
 
-  private
-
   def add_default_avatar
     unless avatar.attached?
       # Assurez-vous que le chemin d'accès et le nom du fichier correspondent à votre fichier d'avatar par défaut
       avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar.jpeg')), filename: 'avatar.jpeg', content_type: 'image/jpeg')
     end
   end
+  private
+
 end
