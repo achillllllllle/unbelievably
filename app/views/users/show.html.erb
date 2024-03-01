@@ -69,7 +69,7 @@
                     <button data-action="click->toggle#offer" class="button pb-2 button-with-chevron" data-target="toggle.icon">
                       <i class="fa-solid fa-chevron-down"></i> See All Reservations
                     </button>
-                    <% count = my_wonder.reservations.count { |reservation| !reservation.accepted? } %>
+                    <% count = my_wonder.reservations.count { |reservation| !reservation.accepted } %>
                     <% if count > 0 %>
                       <p class="text-warning"> <%= count %> pending</p>
                     <% end %>

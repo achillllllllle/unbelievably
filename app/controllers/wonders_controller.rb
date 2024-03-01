@@ -5,14 +5,18 @@ class WondersController < ApplicationController
   def index
     if params["search"] && params["search"]["query"].present?
       query = params["search"]["query"]
-      @wonders = Wonder.where("title ILIKE ?", "%#{query}%")
+      @wonders = Wonder.where("title ILIKE ? AND user_id != ?", "%#{query}%", current_user.id)
     else
-      @wonders = Wonder.all
+      @wonders = Wonder.where.not(user: current_user)
     end
   end
 
   def show
-    @reservation = Reservation.new
+    if current_user != @wonder.user
+      @reservation = Reservation.new
+    else
+      @reservations = @wonder.reservations
+    end
     @marker =
       {
         lat: @wonder.latitude,
