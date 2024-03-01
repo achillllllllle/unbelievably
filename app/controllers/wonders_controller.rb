@@ -51,7 +51,9 @@ class WondersController < ApplicationController
 
   def destroy
     owner = @wonder.user
-    Favorite.find_by(wonder_id: @wonder.id).destroy
+    if Favorite.find_by(wonder_id: @wonder.id)
+      Favorite.find_by(wonder_id: @wonder.id).destroy
+    end
     @wonder.destroy
     redirect_to user_path(owner)
   end
