@@ -30,7 +30,7 @@
             </div>
           </li>
         <% else %>
-          <%= link_to "Sign Up",  new_user_registration_path, class: "ms-2 btn btn-light me-3" %>
+          <%= link_to "Sign Up",  new_user_registration_path, class: "btn btn-light", id: "sign-up" %>
           <%= link_to "Login", new_user_session_path, class: "btn btn-primary primary-gradient " %>
           </li>
         <% end %>
