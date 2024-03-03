@@ -9,12 +9,11 @@
 
       <div class="modal-body">
         <div class="share-card">
-          <div class="share-link my-2" data-controller="copyboard">
+          <div class="share-link my-2" data-controller="copied">
             <div style="display: flex; align-items: center;">
             <img height="25px" src="https://res.cloudinary.com/drrbvxo6s/image/upload/v1709291884/copy_link_ecyuuq.png">
-              <p class="button m-0 ms-2"data-action="click->copyboard#clipboard"
-              data-copyboard-name-param="pouet"
-              ><a href="">Copy Link</a></p>
+              <p  class="button m-0 ms-2" data-copied-target="changeToCopied"   data-action="click->copied#clipboard"
+              >Copy Link</p>
             </div>
           </div>
 

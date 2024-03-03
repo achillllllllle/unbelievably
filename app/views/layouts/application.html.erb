@@ -6,23 +6,28 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%# Import application.scss%>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
+
+    <%# Import of flatpickr %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <%# Import of mapbox %>
     <script src='https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css' rel='stylesheet' />
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+    <%# Usage of openGraph %>
     <meta property="og:title" content="Bring magic and wonder back into your life" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://airbnb-achillllllllle-f17ce457e3ce.herokuapp.com/" />
     <meta property="og:image" content="https://res.cloudinary.com/drrbvxo6s/image/upload/v1709232828/logo-374bbadf2ec6bd27a0258e5f4d472816fb05b1bd4f219e1d70815412196ea409_czyrf6.png" />
     <meta property="og:description" content="Listing with Unbelievably means connecting your unique and magical experiences with an eager audience. Whether you're offering an enchanted treehouse stay, a day with mythical creatures, or a magical potion workshop, our platform is the perfect place to share your passion." />
-
     <meta property="og:site_name" content="Unbelievably" />
-
-
-  </head>
+   </head>
 
   <body>
     <%= render "shared/navbar" %>
