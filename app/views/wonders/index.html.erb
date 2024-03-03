@@ -11,7 +11,7 @@
           <% end %>
           <div class="card-wonder-infos">
             <div>
-              <div class="class">
+              <div class="class card-title-location-restriction">
                 <h2><%= wonder.title %></h2>
               </div>
               <p class="card-content-restriction"><%= wonder.content %></p>
@@ -21,7 +21,7 @@
               </div>
               <div class="d-flex align-items-center">
                 <i class="fa-solid fa-location-dot fa-xs me-2 text-secondary"></i>
-                <p class="fw-bold"><%= wonder.location %></p>
+                <p class="fw-bold card-title-location-restriction"><%= wonder.location %></p>
               </div>
             </div>
             <h2 class="card-wonder-pricing"><%= wonder.price_per_participant.to_i  %>€</h2>
