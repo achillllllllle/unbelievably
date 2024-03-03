@@ -32,3 +32,18 @@
     }
   }
 }
+
+#sign-up{
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+}
+
+// Media queries
+
+
+@media (max-width: 576px) {
+  #sign-up {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
